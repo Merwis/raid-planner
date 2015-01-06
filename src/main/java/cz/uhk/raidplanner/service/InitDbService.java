@@ -53,16 +53,33 @@ public class InitDbService {
 		userAdmin.setPassword("admin");
 		userRepository.save(userAdmin);
 		
-		MyCharacter char1 = new MyCharacter();
-		char1.setName("Hlavní postavièka");
-		char1.setCharClass("Gunslinger");
-		char1.setUser(userAdmin);
-		myCharacterRepository.save(char1);
-		
 		Equipment eq1 = new Equipment();
 		eq1.setChest("Gunslingerùv kabát");
 		eq1.setMainhand("Blasterová pistole");
 		equipmentRepository.save(eq1);
+		
+		MyCharacter char1 = new MyCharacter();
+		char1.setName("Hlavní postavièka");
+		char1.setCharClass("Gunslinger");
+		char1.setUser(userAdmin);
+		char1.setEquip(eq1);
+		myCharacterRepository.save(char1);
+		
+		Equipment eq2 = new Equipment();
+		eq2.setChest("Jediho župan");
+		eq2.setMainhand("Svìtelný meè");
+		equipmentRepository.save(eq2);
+		
+		MyCharacter char2 = new MyCharacter();
+		char2.setName("Druhá postavièka");
+		char2.setCharClass("Jedi Knight");
+		char2.setUser(userAdmin);
+		char2.setEquip(eq2);
+		myCharacterRepository.save(char2);
+		
+		
+		
+		
 		
 		
 		

@@ -6,6 +6,52 @@
 
 <h1>${user.login}</h1>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Nová postava
+</button>
+
+<form:form commandName="myCharacter" cssClass="form-horizontal characterForm">
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nová postava</h4>
+      </div>
+      <div class="modal-body">
+      
+        <div class="form-group">
+		<label for="name" class="col-sm-2 control-label">Name:</label>
+		<div class="col-sm-10">
+			<form:input path="name" cssClass="form-control"/>
+			<form:errors path="name" />
+		</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="charClass" class="col-sm-2 control-label">Class:</label>
+		<div class="col-sm-10">
+			<form:input path="charClass" cssClass="form-control"/>
+			<form:errors path="charClass" />
+		</div>
+		</div>
+	
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+</form:form>
+
+<br /><br />
+
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.nav-tabs a:first').tab('show') // Select first tab	
@@ -14,6 +60,21 @@ $(document).ready(function() {
 		$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
 		$("#modalRemove").modal();
 	});
+	$(".characterForm").validate(
+			{
+				rules: {
+					name: {
+						required : true,
+					}
+				},
+				highlight: function(element) {
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				unhighlight: function(element) {
+					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+				}
+			}		
+		);
 });
 
 </script>

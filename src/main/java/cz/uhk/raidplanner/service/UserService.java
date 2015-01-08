@@ -68,4 +68,8 @@ public class UserService {
 		User user = userRepository.findByLogin(login);
 		return findOneWithCharacters(user.getId());
 	}
+
+	public void delete(int id) {
+		userRepository.delete(id);
+	}
 }

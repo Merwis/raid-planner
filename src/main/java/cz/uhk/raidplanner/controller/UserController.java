@@ -2,15 +2,20 @@ package cz.uhk.raidplanner.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
+import cz.uhk.raidplanner.service.MyCharacterService;
 import cz.uhk.raidplanner.service.UserService;
 
 
@@ -21,40 +26,41 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@ModelAttribute("user") //bindnuti z form:form commandName z user-register.jsp
-	public User construct() {
-		return new User();
-	}
+	@Autowired
+	private MyCharacterService myCharacterService;
 	
-	@RequestMapping("/users")
-	public String users(Model model) {
-		model.addAttribute("users", userService.findAll());
-		return "users";
-	}
 	
-	@RequestMapping("/users/{id}")
-	public String detail(Model model, @PathVariable int id) {
-		model.addAttribute("user", userService.findOneWithCharacters(id));
-		return "user-detail";
-	}
 	
-	@RequestMapping("/register")
-	public String showRegister() {		
-		return "user-register";
-	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String doRegister(@ModelAttribute("user") User user) {
-		userService.save(user);
-		return "redirect:/register.html?success=true";
+	@ModelAttribute("myCharacter") //bindnuti z form:form commandName z user-detail.jsp
+	public MyCharacter constructMyCharacter() {
+		return new MyCharacter();
 	}
 	
 	@RequestMapping("/account")
 	public String account(Model model, Principal principal) {
 		String login = principal.getName();
 		model.addAttribute("user", userService.findOneWithCharacters(login));
-		return "user-detail";
+		return "account";
 	}
+	
+	@RequestMapping(value="/account", method=RequestMethod.POST)
+	public String doAddMyCharacter(Model model, @Valid @ModelAttribute("myCharacter") MyCharacter myCharacter, BindingResult result, Principal principal) {
+		if (result.hasErrors()) {
+			return account(model, principal);
+		}
+		String login = principal.getName();
+		myCharacterService.save(myCharacter, login);
+		return "redirect:/account.html";
+	}
+	
+	@RequestMapping("/character/remove/{id}")
+	public String removeCharacter(@PathVariable int id) {
+		MyCharacter myCharacter = myCharacterService.findOne(id);
+		myCharacterService.delete(myCharacter);
+		return "redirect:/account.html";		
+	}
+	
+	
 }
 
 

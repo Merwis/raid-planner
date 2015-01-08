@@ -2,12 +2,19 @@ package cz.uhk.raidplanner.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import cz.uhk.raidplanner.annotation.UniqueLogin;
 
 
 @Entity
@@ -16,9 +23,16 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@Size(min=3, message="Login musí obsahovat alespoò 3 znaky")
+	@Column(unique = true)
+	@UniqueLogin(message="Uživatel s tímto loginem již existuje")
 	private String login;
 	private String name;
+	@Size(min=1, message="Vyplòte e-mail")
+	@Email(message="Vyplòte platný e-mail")
 	private String email;
+	@Size(min=5, message="Heslo musí obsahovat alespoò 5 znakù")
 	private String password;
 	private boolean enabled;
 
@@ -26,7 +40,7 @@ public class User {
 	@JoinTable
 	private List<Role> roles;
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<MyCharacter> characters;
 	
 	public List<Role> getRoles() {

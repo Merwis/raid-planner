@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ 
+ <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -52,7 +54,7 @@
               <li class="${ current == 'users' ? 'active' : '' }"><a href='<spring:url value="/users.html" />'>Users</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
-              <li class="${ current == 'users' ? 'active' : '' }"><a href='<spring:url value="/account.html" />'>Account</a></li>
+              <li class="${ current == 'account' ? 'active' : '' }"><a href='<spring:url value="/account.html" />'>Account</a></li>
               </security:authorize>
             </ul>
             <ul class="nav navbar-nav navbar-right">

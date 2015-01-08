@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -14,6 +15,7 @@ public class MyCharacter {
 	@Id
 	@GeneratedValue
 	private int id;
+	@Size(min=1, message="Jméno postavy musí být vyplnìno")
 	private String name;
 	private String race;
 	private String charClass;

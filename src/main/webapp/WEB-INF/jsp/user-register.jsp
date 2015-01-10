@@ -51,7 +51,16 @@ $(document).ready(function() {
 			rules: {
 				login: {
 					required : true,
-					minlength : 3
+					minlength : 3,
+					remote : {
+						url: "<spring:url value='/register/available.html' />",
+						type: "get",
+						data: {
+							login: function() {
+								return $("#login").val();
+							}
+						}
+					}
 				},
 				email: {
 					required : true,
@@ -72,6 +81,26 @@ $(document).ready(function() {
 			},
 			unhighlight: function(element) {
 				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			},
+			messages: {
+				login: {
+					remote: "Uživatel s tímto loginem již existuje",
+					minlength: "Login musí obsahovat alespoň 3 znaky",
+					required: "Login musí být vyplněn"
+				},
+				email: {
+					email: "Vyplňte platný e-mail",
+					required: "E-mail musí být vyplněn"
+				},
+				password: {
+					minlength: "Heslo musí obsahovat alespoň 5 znaků",
+					required: "Heslo musí být vyplněno"
+				},
+				password_again: {
+					minlength: "Heslo musí obsahovat alespoň 5 znaků",
+					required: "Heslo musí být vyplněno",
+					equalTo: "Neodpovídá původnímu heslu"
+				}
 			}
 		}		
 	);

@@ -6,6 +6,13 @@
 
 <h1>${user.login}</h1>
 
+<a href='<spring:url value="/user/edit/${user.id}.html"/>' class="btn">Upravit</a>
+
+<br />
+
+<p>${user.name}</p>
+<p>${user.email}</p>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Nová postava
@@ -100,6 +107,7 @@ $(document).ready(function() {
 				<h2><c:out value="${character.name}" /></h2>
 				<p>
 				<a href="<spring:url value="/character/remove/${character.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
+				<a href='<spring:url value="/character/${character.id}.html"/>' class="btn">Upravit</a>
 				
 				<c:out value="${character.charClass}" /></p>
 

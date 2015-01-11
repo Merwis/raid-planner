@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,11 @@ public class UserController {
 		return new MyCharacter();
 	}
 	
+	@ModelAttribute("updateUser") //bindnuti z form:form commandName z user-detail.jsp
+	public User constructUser() {
+		return new User();
+	}
+	
 	@RequestMapping("/account")
 	public String account(Model model, Principal principal) {
 		String login = principal.getName();
@@ -58,6 +64,31 @@ public class UserController {
 		MyCharacter myCharacter = myCharacterService.findOne(id);
 		myCharacterService.delete(myCharacter);
 		return "redirect:/account.html";		
+	}
+	
+	@RequestMapping("user/edit/{id}")
+	public String editUser(Model model, @PathVariable int id, Principal principal) {
+		model.addAttribute("user", userService.findOne(id));
+		User user =  userService.findOne(id);
+		if (user.getLogin() == principal.getName()) {
+			return "user-edit";
+		} else {
+			return "redirect:/account.html";
+		}
+	}
+	
+	@RequestMapping(value="/user/edit/{id}", method=RequestMethod.POST)
+	public String updateUser(Model model, @PathVariable int id, @Valid @ModelAttribute("updateUser") User user, BindingResult result) {
+
+		User user1 = userService.findOne(id);
+		user1.setName(user.getName());
+		user1.setEmail(user.getEmail());
+		if (user.getPassword() !="") {
+			BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+			user1.setPassword(bc.encode(user.getPassword()));
+		}
+		userService.update(user1);
+		return "redirect:/account.html";
 	}
 	
 	

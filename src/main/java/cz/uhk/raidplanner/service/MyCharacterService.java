@@ -27,13 +27,19 @@ public class MyCharacterService {
 
 	@PreAuthorize("#myCharacter.user.login == authentication.name OR hasRole('ROLE_ADMIN')")
 	public void delete(@P("myCharacter") MyCharacter myCharacter) {
-		myCharacterRepository.delete(myCharacter);
-		
+		myCharacterRepository.delete(myCharacter);	
+	}
+	
+	//@PreAuthorize("#myCharacter.user.login == authentication.name OR hasRole('ROLE_ADMIN')")
+	public void update(@P("myCharacter") MyCharacter myCharacter) {
+		myCharacterRepository.save(myCharacter);	
 	}
 
 	public MyCharacter findOne(int id) {
 		return myCharacterRepository.findOne(id);
 	}
+	
+	
 
 	
 	

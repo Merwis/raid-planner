@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +72,10 @@ public class UserService {
 
 	public void delete(int id) {
 		userRepository.delete(id);
+	}
+	
+	public void update(@P("user") User user) {
+		userRepository.save(user);	
 	}
 
 	public User findOne(String login) {		

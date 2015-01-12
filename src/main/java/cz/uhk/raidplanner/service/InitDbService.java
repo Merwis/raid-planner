@@ -11,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.Equipment;
+import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.Role;
 import cz.uhk.raidplanner.entity.User;
 import cz.uhk.raidplanner.repository.EquipmentRepository;
+import cz.uhk.raidplanner.repository.EventTemplateRepository;
 import cz.uhk.raidplanner.repository.MyCharacterRepository;
 import cz.uhk.raidplanner.repository.RoleRepository;
 import cz.uhk.raidplanner.repository.UserRepository;
@@ -36,6 +38,9 @@ public class InitDbService {
 	@Autowired
 	private EquipmentRepository equipmentRepository;
 	
+	@Autowired
+	private EventTemplateRepository eventTemplateRepository;
+	
 	@PostConstruct
 	public void init() {
 		Role roleUser = new Role();
@@ -46,13 +51,17 @@ public class InitDbService {
 		roleAdmin.setName("ROLE_ADMIN");
 		roleRepository.save(roleAdmin);
 		
+		Role roleOfficer = new Role();
+		roleOfficer.setName("ROLE_OFFICER");
+		roleRepository.save(roleOfficer);
+		
 		User userAdmin = new User();
 		userAdmin.setEnabled(true);
 		userAdmin.setLogin("admin");
 		BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		userAdmin.setPassword(bc.encode("admin"));
 		List<Role> roles = new ArrayList<Role>();
-		roles.add(roleUser); roles.add(roleAdmin);
+		roles.add(roleUser); roles.add(roleAdmin); roles.add(roleOfficer);
 		userAdmin.setRoles(roles);
 		userRepository.save(userAdmin);
 		
@@ -85,7 +94,7 @@ public class InitDbService {
 		userUser.setLogin("test");
 		userUser.setPassword(bc.encode("admin"));
 		List<Role> roles1 = new ArrayList<Role>();
-		roles1.add(roleUser);
+		roles1.add(roleUser); roles.add(roleOfficer);
 		userUser.setRoles(roles1);
 		userRepository.save(userUser);
 		
@@ -113,6 +122,19 @@ public class InitDbService {
 		char4.setEquip(eq4);
 		myCharacterRepository.save(char4);
 		
+		EventTemplate et = new EventTemplate();
+		et.setName("Eternity Vault");
+		et.setMaxPlayers(8);
+		et.setMinLvl(50);
+		et.setNote("Popisek raidu");
+		eventTemplateRepository.save(et);
+		
+		EventTemplate et1 = new EventTemplate();
+		et1.setName("Karraga's Pallace");
+		et1.setMaxPlayers(8);
+		et1.setMinLvl(50);
+		et1.setNote("Popisek raidu");
+		eventTemplateRepository.save(et1);
 		
 		
 		

@@ -28,7 +28,7 @@
 	<definition name="user-edit" extends="common">
 		<put-attribute name="title" value="User edit | Raidplanner" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user-edit.jsp" />
-		<put-attribute name="current" value="users" />	
+		<put-attribute name="current" value="account" />	
 	</definition>
 	
 	<definition name="account" extends="common">
@@ -53,5 +53,23 @@
 		<put-attribute name="title" value="Login | Raidplanner" />
 		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 		<put-attribute name="current" value="login" />	
+	</definition>
+	
+	<definition name="event-template-list" extends="common">
+		<put-attribute name="title" value="Seznam sablon | Raidplanner" />
+		<put-attribute name="body" value="/WEB-INF/jsp/event-template-list.jsp" />
+		<put-attribute name="current" value="eventTemplates" />	
+	</definition>
+	
+	<definition name="event-template-create" extends="common">
+		<put-attribute name="title" value="Vytvorit sablonu | Raidplanner" />
+		<put-attribute name="body" value="/WEB-INF/jsp/event-template-create.jsp" />
+		<put-attribute name="current" value="eventTemplates" />	
+	</definition>
+	
+	<definition name="event-template-detail" extends="common">
+		<put-attribute name="title" value="Detail sablony | Raidplanner" />
+		<put-attribute name="body" value="/WEB-INF/jsp/event-template-detail.jsp" />
+		<put-attribute name="current" value="eventTemplates" />	
 	</definition>
 </tiles-definitions>

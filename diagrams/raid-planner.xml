@@ -13,9 +13,20 @@
 	<entity>
 		<entity-name>cz.uhk.raidplanner.entity.User</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>226</entity-height>
+		<entity-height>266</entity-height>
 		<entity-X-Coordinate>70</entity-X-Coordinate>
 		<entity-Y-Coordinate>70</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>cz.uhk.raidplanner.entity.MyCharacter</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>266</entity-height>
+		<entity-X-Coordinate>360</entity-X-Coordinate>
+		<entity-Y-Coordinate>90</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -33,11 +44,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>cz.uhk.raidplanner.entity.MyCharacter</entity-name>
+		<entity-name>cz.uhk.raidplanner.entity.EventTemplate</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>246</entity-height>
-		<entity-X-Coordinate>360</entity-X-Coordinate>
-		<entity-Y-Coordinate>90</entity-Y-Coordinate>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>724</entity-X-Coordinate>
+		<entity-Y-Coordinate>511</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>cz.uhk.raidplanner.entity.Event</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>481</entity-X-Coordinate>
+		<entity-Y-Coordinate>500</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

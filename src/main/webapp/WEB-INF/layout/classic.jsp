@@ -57,6 +57,7 @@
               <li class="${ current == 'eventTemplates' ? 'active' : '' }"><a href='<spring:url value="/event/template/list.html" />'>Šablony eventů</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
+              <li class="${ current == 'events' ? 'active' : '' }"><a href='<spring:url value="/event/list.html" />'>Eventy</a></li>
               <li class="${ current == 'account' ? 'active' : '' }"><a href='<spring:url value="/account.html" />'>Účet</a></li>
               </security:authorize>
             </ul>

@@ -1,9 +1,12 @@
 package cz.uhk.raidplanner.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
@@ -28,7 +31,16 @@ public class MyCharacter {
 	@JoinColumn(name="equip_id")
 	private Equipment equip;
 	
+	@ManyToMany
+	private List<Event> events;
 	
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 	public User getUser() {
 		return user;
 	}

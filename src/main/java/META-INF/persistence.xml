@@ -6,5 +6,6 @@
 		<class>cz.uhk.raidplanner.entity.MyCharacter</class>
 		<class>cz.uhk.raidplanner.entity.Equipment</class>
 		<class>cz.uhk.raidplanner.entity.EventTemplate</class>
+		<class>cz.uhk.raidplanner.entity.Event</class>
 	</persistence-unit>
 </persistence>

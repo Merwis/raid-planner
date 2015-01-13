@@ -1,7 +1,12 @@
 package cz.uhk.raidplanner.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -11,11 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.Equipment;
+import cz.uhk.raidplanner.entity.Event;
 import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.Role;
 import cz.uhk.raidplanner.entity.User;
 import cz.uhk.raidplanner.repository.EquipmentRepository;
+import cz.uhk.raidplanner.repository.EventRepository;
 import cz.uhk.raidplanner.repository.EventTemplateRepository;
 import cz.uhk.raidplanner.repository.MyCharacterRepository;
 import cz.uhk.raidplanner.repository.RoleRepository;
@@ -40,6 +47,9 @@ public class InitDbService {
 	
 	@Autowired
 	private EventTemplateRepository eventTemplateRepository;
+	
+	@Autowired
+	private EventRepository eventRepository;
 	
 	@PostConstruct
 	public void init() {
@@ -136,7 +146,23 @@ public class InitDbService {
 		et1.setNote("Popisek raidu");
 		eventTemplateRepository.save(et1);
 		
-		
+		Event ev1 = new Event();
+		String string = "January 23, 2015, 20:00:00";
+		DateFormat format = new SimpleDateFormat("MMMM d, yyyy, HH", Locale.ENGLISH);
+		Date date;
+		try {
+			date = format.parse(string);
+		} catch (ParseException e) {
+			date = null;
+			e.printStackTrace();
+		}
+		ev1.setDate(date);
+		List<MyCharacter> characters = new ArrayList<MyCharacter>();
+		characters.add(char1); characters.add(char4);
+		ev1.setCharacters(characters);
+		ev1.setEventTemplate(et);
+		ev1.setLeader(userAdmin);
+		eventRepository.save(ev1);
 		
 		
 	}

@@ -1,8 +1,11 @@
 package cz.uhk.raidplanner.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
@@ -19,7 +22,15 @@ public class EventTemplate {
 	@Digits(integer=2, fraction=0, message="Poèet hráèù musí bıt rozumné èíslo")
 	private int maxPlayers;
 	private String note;
+	@OneToMany(mappedBy="eventTemplate")
+	private List<Event> events;
 	
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 	public int getId() {
 		return id;
 	}

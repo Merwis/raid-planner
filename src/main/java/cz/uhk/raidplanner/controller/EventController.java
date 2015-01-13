@@ -13,14 +13,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cz.uhk.raidplanner.entity.Event;
 import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
+import cz.uhk.raidplanner.service.EventService;
 import cz.uhk.raidplanner.service.EventTemplateService;
 
 @Controller
 @RequestMapping("/event")
 public class EventController {
+	
+	@Autowired
+	private EventService eventService;
+	
+	@ModelAttribute("event") //bindnuti z form:form commandName z user-detail.jsp
+	public Event constructEvent() {
+		return new Event();
+	}
+	
+	@RequestMapping("/list")
+	public String showEventList(Model model) {
+		model.addAttribute("events", eventService.findAll());
+		return "event-list";
+	}
+	
+	
+	
+	
+	
+	
+	
+	// EVENT TEMPLATES
 	
 	@Autowired
 	private EventTemplateService eventTemplateService;
@@ -31,7 +55,7 @@ public class EventController {
 	}
 	
 	@RequestMapping("/template/list")
-	public String showEventList(Model model) {
+	public String showEventTemplateList(Model model) {
 		model.addAttribute("eventTemplate", eventTemplateService.findAll());
 		return "event-template-list";
 	}

@@ -61,6 +61,19 @@
 	</filter-mapping>
 	<!--  -->
 	
+	<filter>
+		<filter-name>oemInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+		<init-param>
+			<param-name>entityManagerFactoryBeanName</param-name>
+			<param-value>emf</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>oemInViewFilter</filter-name>
+		<url-pattern>/event/*</url-pattern>
+	</filter-mapping>
+	
 	<context-param>
 		<param-name>defaultHtmlEscape</param-name>
 		<param-value>true</param-value>

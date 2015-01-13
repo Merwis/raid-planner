@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -31,7 +32,7 @@ public class MyCharacter {
 	@JoinColumn(name="equip_id")
 	private Equipment equip;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="characters")
 	private List<Event> events;
 	
 	

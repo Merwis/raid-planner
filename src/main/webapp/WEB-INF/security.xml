@@ -15,7 +15,8 @@
 		<intercept-url pattern="/character/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/event/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/user/templates/**" access="hasRole('ROLE_OFFICER')" />
+		<intercept-url pattern="/event/templates/**" access="hasRole('ROLE_OFFICER')" />
+		<intercept-url pattern="/event/remove/**" access="hasRole('ROLE_OFFICER')" />
 		<form-login login-page="/login.html" />
 		<logout logout-success-url="/" logout-url="/logout" />
 	</http>

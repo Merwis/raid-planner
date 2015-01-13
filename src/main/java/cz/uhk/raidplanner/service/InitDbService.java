@@ -164,6 +164,23 @@ public class InitDbService {
 		ev1.setLeader(userAdmin);
 		eventRepository.save(ev1);
 		
+		Event ev2 = new Event();
+		String string1 = "January 24, 2015, 20:00:00";
+		DateFormat format1 = new SimpleDateFormat("MMMM d, yyyy, HH", Locale.ENGLISH);
+		Date date1;
+		try {
+			date1 = format1.parse(string1);
+		} catch (ParseException e) {
+			date1 = null;
+			e.printStackTrace();
+		}
+		ev2.setDate(date1);
+		characters.add(char1); characters.add(char4);
+		ev2.setCharacters(characters);
+		ev2.setEventTemplate(et1);
+		ev2.setLeader(userAdmin);
+		eventRepository.save(ev2);
+		
 		
 	}
 }

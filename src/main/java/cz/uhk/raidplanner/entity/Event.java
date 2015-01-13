@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,14 +21,15 @@ public class Event {
 	private int id;
 	private Date date;
 	@ManyToOne
-	@JoinColumn(name="myCharacter_id")
+	@JoinColumn(name="eventTemplate_id")
 	private EventTemplate eventTemplate;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User leader;
 	
-	@ManyToMany(mappedBy="events")
+	@ManyToMany
+	@JoinTable
 	private List<MyCharacter> characters;
 	
 	

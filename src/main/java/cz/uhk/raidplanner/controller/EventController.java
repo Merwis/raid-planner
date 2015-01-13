@@ -38,8 +38,17 @@ public class EventController {
 		return "event-list";
 	}
 	
+	@RequestMapping("/remove/{id}")
+	public String removeEvent(@PathVariable int id) {
+		eventService.delete(id);
+		return "redirect:/event/list.html";
+	}
 	
-	
+	@RequestMapping("/detail/{id}")
+	public String detailEvent(Model model, @PathVariable int id) {
+		model.addAttribute("event", eventService.findOne(id));
+		return "event-detail";
+	}
 	
 	
 	

@@ -26,17 +26,17 @@ $(document).ready(function() {
 		<c:forEach items="${events}" var="event">
 			<tr>
 				<td>
-					<a href='<spring:url value="/users/${user.id}.html"/>'>
+					<a href='<spring:url value="/event/detail/${event.id}.html"/>'>
 						<c:out value="${event.date}" />
 					</a>
 				</td>
 				<td>
-					<a href='<spring:url value="/users/${user.id}.html"/>'>
+					<a href='<spring:url value="/event/detail/${event.id}.html"/>'>
 						<c:out value="${event.eventTemplate.name}" />
 					</a>
 				</td>
 				<td>
-					<a href="<spring:url value="/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
+					<a href="<spring:url value="/event/remove/${event.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
 				</td>
 			</tr>
 		</c:forEach>

@@ -15,12 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import cz.uhk.raidplanner.entity.CharacterOnEvent;
 import cz.uhk.raidplanner.entity.Equipment;
 import cz.uhk.raidplanner.entity.Event;
 import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.Role;
 import cz.uhk.raidplanner.entity.User;
+import cz.uhk.raidplanner.repository.CharacterOnEventRepository;
 import cz.uhk.raidplanner.repository.EquipmentRepository;
 import cz.uhk.raidplanner.repository.EventRepository;
 import cz.uhk.raidplanner.repository.EventTemplateRepository;
@@ -50,6 +52,9 @@ public class InitDbService {
 	
 	@Autowired
 	private EventRepository eventRepository;
+	
+	@Autowired
+	private CharacterOnEventRepository characterOnEventRepository;
 	
 	@PostConstruct
 	public void init() {
@@ -146,6 +151,8 @@ public class InitDbService {
 		et1.setNote("Popisek raidu");
 		eventTemplateRepository.save(et1);
 		
+		
+		
 		Event ev1 = new Event();
 		String string = "January 23, 2015, 20:00:00";
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy, HH", Locale.ENGLISH);
@@ -157,9 +164,6 @@ public class InitDbService {
 			e.printStackTrace();
 		}
 		ev1.setDate(date);
-		List<MyCharacter> characters = new ArrayList<MyCharacter>();
-		characters.add(char1); characters.add(char4);
-		ev1.setCharacters(characters);
 		ev1.setEventTemplate(et);
 		ev1.setLeader(userAdmin);
 		eventRepository.save(ev1);
@@ -175,11 +179,24 @@ public class InitDbService {
 			e.printStackTrace();
 		}
 		ev2.setDate(date1);
-		characters.add(char1); characters.add(char4);
-		ev2.setCharacters(characters);
 		ev2.setEventTemplate(et1);
 		ev2.setLeader(userAdmin);
 		eventRepository.save(ev2);
+		
+		CharacterOnEvent coe1 = new CharacterOnEvent();
+		coe1.setEvent(ev1);
+		coe1.setMyCharacter(char1);
+		coe1.setRole("DPS");
+		coe1.setStatus("confirmed");
+		characterOnEventRepository.save(coe1);
+		
+		CharacterOnEvent coe2 = new CharacterOnEvent();
+		coe2.setEvent(ev1);
+		coe2.setMyCharacter(char3);
+		coe2.setRole("Tank");
+		coe2.setStatus("available");
+		characterOnEventRepository.save(coe2);
+		
 		
 		
 	}

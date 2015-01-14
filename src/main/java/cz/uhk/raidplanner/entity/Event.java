@@ -28,9 +28,8 @@ public class Event {
 	@JoinColumn(name="user_id")
 	private User leader;
 	
-	@ManyToMany
-	@JoinTable
-	private List<MyCharacter> characters;
+	@OneToMany(mappedBy="event")
+	private List<CharacterOnEvent> characters;
 	
 	
 	public int getId() {
@@ -57,10 +56,10 @@ public class Event {
 	public void setLeader(User leader) {
 		this.leader = leader;
 	}
-	public List<MyCharacter> getCharacters() {
+	public List<CharacterOnEvent> getCharacters() {
 		return characters;
 	}
-	public void setCharacters(List<MyCharacter> characters) {
+	public void setCharacters(List<CharacterOnEvent> characters) {
 		this.characters = characters;
 	}
 	

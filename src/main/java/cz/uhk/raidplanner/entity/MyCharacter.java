@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
@@ -32,14 +33,14 @@ public class MyCharacter {
 	@JoinColumn(name="equip_id")
 	private Equipment equip;
 	
-	@ManyToMany(mappedBy="characters")
-	private List<Event> events;
+	@OneToMany(mappedBy="myCharacter")
+	private List<CharacterOnEvent> events;
 	
 	
-	public List<Event> getEvents() {
+	public List<CharacterOnEvent> getEvents() {
 		return events;
 	}
-	public void setEvents(List<Event> events) {
+	public void setEvents(List<CharacterOnEvent> events) {
 		this.events = events;
 	}
 	public User getUser() {

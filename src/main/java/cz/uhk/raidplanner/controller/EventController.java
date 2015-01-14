@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cz.uhk.raidplanner.entity.CharacterOnEvent;
 import cz.uhk.raidplanner.entity.Event;
 import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
+import cz.uhk.raidplanner.service.CharacterOnEventService;
 import cz.uhk.raidplanner.service.EventService;
 import cz.uhk.raidplanner.service.EventTemplateService;
 
@@ -26,6 +28,9 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private CharacterOnEventService characterOnEventService;
 	
 	@ModelAttribute("event") //bindnuti z form:form commandName z user-detail.jsp
 	public Event constructEvent() {
@@ -47,6 +52,9 @@ public class EventController {
 	@RequestMapping("/detail/{id}")
 	public String detailEvent(Model model, @PathVariable int id) {
 		model.addAttribute("event", eventService.findOne(id));
+		Event event = eventService.findOne(id);
+		model.addAttribute("coe", characterOnEventService.findAllWithEvent(event));
+		
 		return "event-detail";
 	}
 	

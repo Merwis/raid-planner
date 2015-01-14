@@ -32,8 +32,8 @@
 	</tbody>
 </table>
 
-<c:forEach items="${event.characters}" var="character">
-	<p><c:out value="${character.name}" />	</p>
+<c:forEach items="${coe}" var="coe">
+	<p><c:out value="${coe.myCharacter.name}" /> <br /> <c:out value="${coe.role}" /></p>
 </c:forEach>
 
 

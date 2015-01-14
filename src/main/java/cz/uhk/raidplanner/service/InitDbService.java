@@ -186,7 +186,7 @@ public class InitDbService {
 		CharacterOnEvent coe1 = new CharacterOnEvent();
 		coe1.setEvent(ev1);
 		coe1.setMyCharacter(char1);
-		coe1.setRole("DPS");
+		coe1.setRole("RDPS");
 		coe1.setStatus("confirmed");
 		characterOnEventRepository.save(coe1);
 		
@@ -196,6 +196,13 @@ public class InitDbService {
 		coe2.setRole("Tank");
 		coe2.setStatus("available");
 		characterOnEventRepository.save(coe2);
+		
+		CharacterOnEvent coe3 = new CharacterOnEvent();
+		coe3.setEvent(ev1);
+		coe3.setMyCharacter(char2);
+		coe3.setRole("Tank");
+		coe3.setStatus("notavailable");
+		characterOnEventRepository.save(coe3);
 		
 		
 		

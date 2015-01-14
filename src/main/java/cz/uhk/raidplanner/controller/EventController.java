@@ -1,6 +1,8 @@
 package cz.uhk.raidplanner.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -25,6 +27,8 @@ import cz.uhk.raidplanner.service.EventTemplateService;
 @Controller
 @RequestMapping("/event")
 public class EventController {
+	
+	
 	
 	@Autowired
 	private EventService eventService;
@@ -53,7 +57,29 @@ public class EventController {
 	public String detailEvent(Model model, @PathVariable int id) {
 		model.addAttribute("event", eventService.findOne(id));
 		Event event = eventService.findOne(id);
-		model.addAttribute("coe", characterOnEventService.findAllWithEvent(event));
+		
+		List<CharacterOnEvent> coe = characterOnEventService.findAllWithEvent(event);
+		List<CharacterOnEvent> coeC = new ArrayList<CharacterOnEvent>();
+		List<CharacterOnEvent> coeA = new ArrayList<CharacterOnEvent>();
+		List<CharacterOnEvent> coeN = new ArrayList<CharacterOnEvent>();
+		
+		for (int i = 0; i < coe.size(); i++) {
+			if (coe.get(i).getStatus() == "confirmed") {
+				coeC.add(coe.get(i));
+			} else {
+				if (coe.get(i).getStatus() == "available") {
+					coeA.add(coe.get(i));
+				} else {
+					if (coe.get(i).getStatus() == "notavailable") {
+						coeN.add(coe.get(i));
+					}
+				}
+			}
+		}
+		
+		model.addAttribute("coeC", coeC);
+		model.addAttribute("coeA", coeA);
+		model.addAttribute("coeN", coeN);
 		
 		return "event-detail";
 	}

@@ -19,6 +19,8 @@ public class CharacterOnEvent {
 	@ManyToOne
 	@JoinColumn(name="event_id")
 	private Event event;
+	private String role;
+	private String status;
 	
 	public int getId() {
 		return id;
@@ -50,6 +52,4 @@ public class CharacterOnEvent {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	private String role;
-	private String status;
 }

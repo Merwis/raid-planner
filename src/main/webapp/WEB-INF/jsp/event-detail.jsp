@@ -32,11 +32,6 @@
 	</tbody>
 </table>
 
-<c:forEach items="${coe}" var="coe">
-	<p><c:out value="${coe.myCharacter.name}" /> <br /> <c:out value="${coe.role}" /></p>
-	<c:if test="${coe.role == 'Tank'}"><c:out value="${coe.myCharacter.name}" /></c:if>
-</c:forEach>
-
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
@@ -72,16 +67,12 @@
 	</tbody>
 </table>
 
-<c:forEach items="${characters}" var="character">
-	<c:out value="${character.name}" /><br />
-</c:forEach>
-
 <form:form action="${event.id}/characters.html" commandName="characterAvailability" cssClass="form-horizontal registrationForm">
 
 	<div class="form-group">
 		<label for="event" class="col-sm-2 control-label"></label>
 		<div class="col-sm-10">
-			<form:input path="event" value="${event.id}" cssClass="form-control"/>
+			<form:input type="hidden" path="event" value="${event.id}" cssClass="form-control"/>
 			<form:errors path="event" />
 		</div>
 	</div>
@@ -98,6 +89,32 @@
 			<form:errors path="myCharacter" />
 		</div>
 	</div>
+	
+	<div class="form-group">
+		<label for="role" class="col-sm-2 control-label">Role:</label>
+		<div class="col-sm-10">
+			<%-- <form:input path="eventTemplate" cssClass="form-control"/> --%>
+			<form:select path="role" cssClass="form-control" >
+				<form:option value="Tank" label="Tank" />
+				<form:option value="Healer" label="Healer" />
+				<form:option value="MDPS" label="Melee DPS" />
+				<form:option value="RDPS" label="Ranged DPS" />
+			</form:select>
+			<form:errors path="role" />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="status" class="col-sm-2 control-label">Status:</label>
+		<div class="col-sm-10">
+			<%-- <form:input path="eventTemplate" cssClass="form-control"/> --%>
+			<form:select path="status" cssClass="form-control" >
+				<form:option value="available" label="Přítomen" />
+				<form:option value="notavailable" label="Nepřítomen" />
+			</form:select>
+			<form:errors path="status" />
+		</div>
+	</div>
 
 	<div class="form-group">
 		<div class="col-sm-2">
@@ -106,6 +123,18 @@
 	</div>
 
 </form:form>
+
+<%-- <c:forEach items="${coe}" var="coe">
+<c:out value="${coe.myCharacter.name}" /><br />
+<c:out value="${coe.status}" /><br />
+<c:out value="${coe.role}" /><br />
+</c:forEach>
+------------------------------------------<br />
+<c:forEach items="${coeA}" var="coeA">
+<c:out value="${coeA.myCharacter.name}" /><br />
+<c:out value="${coeA.status}" /><br />
+<c:out value="${coeA.role}" /><br />
+</c:forEach> --%>
 
 
 

@@ -83,13 +83,13 @@ public class EventController {
 		List<CharacterOnEvent> coeN = new ArrayList<CharacterOnEvent>();
 		
 		for (int i = 0; i < coe.size(); i++) {
-			if (coe.get(i).getStatus() == "confirmed") {
+			if (coe.get(i).getStatus().equals("confirmed")) {
 				coeC.add(coe.get(i));
 			} else {
-				if (coe.get(i).getStatus() == "available") {
+				if (coe.get(i).getStatus().equals("available")) {
 					coeA.add(coe.get(i));
 				} else {
-					if (coe.get(i).getStatus() == "notavailable") {
+					if (coe.get(i).getStatus().equals("notavailable")) {
 						coeN.add(coe.get(i));
 					}
 				}
@@ -99,6 +99,7 @@ public class EventController {
 		model.addAttribute("coeC", coeC);
 		model.addAttribute("coeA", coeA);
 		model.addAttribute("coeN", coeN);
+		model.addAttribute("coe", coe);
 		
 		String login = principal.getName();
 		User user = userService.findOne(login);
@@ -113,8 +114,6 @@ public class EventController {
 		if (result.hasErrors()) {
 			return detailEvent(model, id, principal);
 		}
-		coe.setRole("Healer");
-		coe.setStatus("available");
 		characterOnEventService.save(coe);
 		//eventTemplateService.save(eventTemplate);
 		return "redirect:/event/detail/{id}.html";

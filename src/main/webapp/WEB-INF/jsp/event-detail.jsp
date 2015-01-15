@@ -72,6 +72,41 @@
 	</tbody>
 </table>
 
+<c:forEach items="${characters}" var="character">
+	<c:out value="${character.name}" /><br />
+</c:forEach>
+
+<form:form action="${event.id}/characters.html" commandName="characterAvailability" cssClass="form-horizontal registrationForm">
+
+	<div class="form-group">
+		<label for="event" class="col-sm-2 control-label"></label>
+		<div class="col-sm-10">
+			<form:input path="event" value="${event.id}" cssClass="form-control"/>
+			<form:errors path="event" />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="myCharacter" class="col-sm-2 control-label">Postava:</label>
+		<div class="col-sm-10">
+			<%-- <form:input path="eventTemplate" cssClass="form-control"/> --%>
+			<form:select path="myCharacter" cssClass="form-control" >
+				<c:forEach items="${characters}" var="character">
+				<form:option value="${character.id}" label="${character.name}" />
+				</c:forEach>
+			</form:select>
+			<form:errors path="myCharacter" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-2">
+			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+		</div>
+	</div>
+
+</form:form>
+
 
 
 

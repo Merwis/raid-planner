@@ -1,5 +1,7 @@
 package cz.uhk.raidplanner.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,6 +39,10 @@ public class MyCharacterService {
 
 	public MyCharacter findOne(int id) {
 		return myCharacterRepository.findOne(id);
+	}
+
+	public List<MyCharacter> findAllByUser(User user) {
+		return myCharacterRepository.findByUser(user);
 	}
 	
 	

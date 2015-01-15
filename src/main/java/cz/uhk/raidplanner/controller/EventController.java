@@ -24,14 +24,22 @@ import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
 import cz.uhk.raidplanner.service.CharacterOnEventService;
 import cz.uhk.raidplanner.service.Editor;
+import cz.uhk.raidplanner.service.EditorCharacter;
+import cz.uhk.raidplanner.service.EditorEvent;
 import cz.uhk.raidplanner.service.EventService;
 import cz.uhk.raidplanner.service.EventTemplateService;
+import cz.uhk.raidplanner.service.MyCharacterService;
+import cz.uhk.raidplanner.service.UserService;
 
 @Controller
 @RequestMapping("/event")
 public class EventController {
 	
+	@Autowired
+	private MyCharacterService myCharacterService;
 	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private EventService eventService;
@@ -47,6 +55,11 @@ public class EventController {
 		return new Event();
 	}
 	
+	@ModelAttribute("characterAvailability") //bindnuti z form:form commandName z user-detail.jsp
+	public CharacterOnEvent constructCharacterOnEvent() {
+		return new CharacterOnEvent();
+	}
+	
 	@RequestMapping("/list")
 	public String showEventList(Model model) {
 		model.addAttribute("events", eventService.findAll());
@@ -60,7 +73,7 @@ public class EventController {
 	}
 	
 	@RequestMapping("/detail/{id}")
-	public String detailEvent(Model model, @PathVariable int id) {
+	public String detailEvent(Model model, @PathVariable int id, Principal principal) {
 		model.addAttribute("event", eventService.findOne(id));
 		Event event = eventService.findOne(id);
 		
@@ -87,7 +100,24 @@ public class EventController {
 		model.addAttribute("coeA", coeA);
 		model.addAttribute("coeN", coeN);
 		
+		String login = principal.getName();
+		User user = userService.findOne(login);
+		model.addAttribute("characters", myCharacterService.findAllByUser(user));
+		
 		return "event-detail";
+	}
+	
+	@RequestMapping(value="/detail/{id}/characters", method=RequestMethod.POST)
+	public String doAddCharacterOnEvent(Model model, @Valid @ModelAttribute("characterAvailability") CharacterOnEvent coe, BindingResult result, 
+			@PathVariable int id, Principal principal) {
+		if (result.hasErrors()) {
+			return detailEvent(model, id, principal);
+		}
+		coe.setRole("Healer");
+		coe.setStatus("available");
+		characterOnEventService.save(coe);
+		//eventTemplateService.save(eventTemplate);
+		return "redirect:/event/detail/{id}.html";
 	}
 	
 	@RequestMapping("/create")
@@ -101,6 +131,8 @@ public class EventController {
 	@InitBinder
 	protected void initBinder(WebDataBinder binder){
 	    binder.registerCustomEditor(EventTemplate.class, new Editor(eventTemplateService));
+	    binder.registerCustomEditor(MyCharacter.class, new EditorCharacter(myCharacterService));
+	    binder.registerCustomEditor(Event.class, new EditorEvent(eventService));
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
@@ -113,6 +145,8 @@ public class EventController {
 		//eventTemplateService.save(eventTemplate);
 		return "redirect:/event/list.html";
 	}
+	
+	
 	
 	
 	

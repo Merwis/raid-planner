@@ -23,4 +23,9 @@ public class CharacterOnEventService {
 		List<CharacterOnEvent> coe = characterOnEventRepository.findByEvent(event);
 		return coe;
 	}
+
+	public void save(CharacterOnEvent coe) {
+		characterOnEventRepository.save(coe);
+		
+	}
 }

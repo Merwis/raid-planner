@@ -45,4 +45,9 @@ public class EventService {
 		
 	}
 
+	public void save(Event event) {
+		eventRepository.save(event);
+		
+	}
+
 }

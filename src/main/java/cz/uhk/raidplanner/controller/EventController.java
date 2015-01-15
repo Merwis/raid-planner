@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
 import cz.uhk.raidplanner.service.CharacterOnEventService;
+import cz.uhk.raidplanner.service.Editor;
 import cz.uhk.raidplanner.service.EventService;
 import cz.uhk.raidplanner.service.EventTemplateService;
 
@@ -36,7 +39,10 @@ public class EventController {
 	@Autowired
 	private CharacterOnEventService characterOnEventService;
 	
-	@ModelAttribute("event") //bindnuti z form:form commandName z user-detail.jsp
+	@Autowired
+	private EventTemplateService eventTemplateService;
+	
+	@ModelAttribute("eventCreate") //bindnuti z form:form commandName z user-detail.jsp
 	public Event constructEvent() {
 		return new Event();
 	}
@@ -84,13 +90,34 @@ public class EventController {
 		return "event-detail";
 	}
 	
+	@RequestMapping("/create")
+	public String showCreateEvent(Model model){
+		model.addAttribute("et", eventTemplateService.findAll());
+		
+		return "event-create";
+	}
+	
+	// Binder pro napojení EventTemplate na id prichazejici z formulare pomoci tridy Editor
+	@InitBinder
+	protected void initBinder(WebDataBinder binder){
+	    binder.registerCustomEditor(EventTemplate.class, new Editor(eventTemplateService));
+	}
+	
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public String doAddEvent(Model model, @Valid @ModelAttribute("eventCreate") Event event, BindingResult result) {
+		if (result.hasErrors()) {
+			return showCreateEvent(model);
+		}
+		
+		eventService.save(event);
+		//eventTemplateService.save(eventTemplate);
+		return "redirect:/event/list.html";
+	}
 	
 	
 	
 	// EVENT TEMPLATES
 	
-	@Autowired
-	private EventTemplateService eventTemplateService;
 	
 	@ModelAttribute("eventTemplate") //bindnuti z form:form commandName z user-detail.jsp
 	public EventTemplate constructEventTemplate() {

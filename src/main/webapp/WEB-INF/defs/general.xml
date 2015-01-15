@@ -84,4 +84,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/event-detail.jsp" />
 		<put-attribute name="current" value="events" />	
 	</definition>
+	
+	<definition name="event-create" extends="common">
+		<put-attribute name="title" value="Tvorba eventu | Raidplanner" />
+		<put-attribute name="body" value="/WEB-INF/jsp/event-create.jsp" />
+		<put-attribute name="current" value="events" />	
+	</definition>
 </tiles-definitions>

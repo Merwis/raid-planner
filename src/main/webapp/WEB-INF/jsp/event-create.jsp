@@ -7,6 +7,10 @@
 $(function() {
 $( "#datepicker" ).datepicker();
 });
+$(function() {
+$("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 'now'  });
+});
+
 </script>
 
 <form:form commandName="eventCreate" cssClass="form-horizontal registrationForm">
@@ -16,6 +20,13 @@ $( "#datepicker" ).datepicker();
 		<div class="col-sm-10">
 			<form:input path="date" cssClass="form-control" id="datepicker"/>
 			<form:errors path="date" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="time" class="col-sm-2 control-label">Čas:</label>
+		<div class="col-sm-10">
+			<form:input path="time" cssClass="form-control" id="timepicker" />
+			<form:errors path="time" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -47,6 +58,9 @@ $(document).ready(function() {
 				date: {
 					required : true,
 					date : true
+				},
+				time: {
+					required : true,
 				},
 				eventTemplate: {
 					required : true,

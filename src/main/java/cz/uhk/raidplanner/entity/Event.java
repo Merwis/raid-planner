@@ -20,6 +20,7 @@ public class Event {
 	@GeneratedValue
 	private int id;
 	private Date date;
+	private String time;
 	@ManyToOne
 	@JoinColumn(name="eventTemplate_id")
 	private EventTemplate eventTemplate;
@@ -61,6 +62,12 @@ public class Event {
 	}
 	public void setCharacters(List<CharacterOnEvent> characters) {
 		this.characters = characters;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 	
 }

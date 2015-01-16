@@ -1,7 +1,11 @@
 package cz.uhk.raidplanner.controller;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,6 +26,7 @@ import cz.uhk.raidplanner.entity.Event;
 import cz.uhk.raidplanner.entity.EventTemplate;
 import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.entity.User;
+import cz.uhk.raidplanner.model.DateManipulation;
 import cz.uhk.raidplanner.service.CharacterOnEventService;
 import cz.uhk.raidplanner.service.Editor;
 import cz.uhk.raidplanner.service.EditorCharacter;
@@ -57,6 +62,11 @@ public class EventController {
 	
 	@ModelAttribute("characterAvailability") //bindnuti z form:form commandName z user-detail.jsp
 	public CharacterOnEvent constructCharacterOnEvent() {
+		return new CharacterOnEvent();
+	}
+	
+	@ModelAttribute("characterConfirmation") //bindnuti z form:form commandName z user-detail.jsp
+	public CharacterOnEvent constructCharacterOnEvent1() {
 		return new CharacterOnEvent();
 	}
 	
@@ -99,11 +109,18 @@ public class EventController {
 		model.addAttribute("coeC", coeC);
 		model.addAttribute("coeA", coeA);
 		model.addAttribute("coeN", coeN);
-		model.addAttribute("coe", coe);
+		
 		
 		String login = principal.getName();
 		User user = userService.findOne(login);
 		model.addAttribute("characters", myCharacterService.findAllByUser(user));
+		
+		if (user == event.getLeader()) {
+			List<CharacterOnEvent> coeF = new ArrayList<CharacterOnEvent>();
+			coeF.addAll(coeC);
+			coeF.addAll(coeA);
+			model.addAttribute("coeF", coeF);
+		}
 		
 		return "event-detail";
 	}
@@ -114,6 +131,19 @@ public class EventController {
 		if (result.hasErrors()) {
 			return detailEvent(model, id, principal);
 		}
+		characterOnEventService.save(coe);
+		//eventTemplateService.save(eventTemplate);
+		return "redirect:/event/detail/{id}.html";
+	}
+	
+	@RequestMapping(value="/detail/{id}/confirmation", method=RequestMethod.POST)
+	public String doConfirmCharacterOnEvent(Model model, @Valid @ModelAttribute("characterConfirmation") CharacterOnEvent coe, BindingResult result, 
+			@PathVariable int id, Principal principal) {
+		if (result.hasErrors()) {
+			return detailEvent(model, id, principal);
+		}
+		CharacterOnEvent coeOld = characterOnEventService.findOneWithEvent(coe.getEvent(), coe.getMyCharacter());
+		coe.setRole(coeOld.getRole());
 		characterOnEventService.save(coe);
 		//eventTemplateService.save(eventTemplate);
 		return "redirect:/event/detail/{id}.html";
@@ -135,10 +165,17 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String doAddEvent(Model model, @Valid @ModelAttribute("eventCreate") Event event, BindingResult result) {
+	public String doAddEvent(Model model, @Valid @ModelAttribute("eventCreate") Event event, BindingResult result, Principal principal) {
 		if (result.hasErrors()) {
 			return showCreateEvent(model);
 		}
+		
+		DateManipulation dm = new DateManipulation();
+		
+		event.setDate(dm.joinDateAndTime(event.getDate(), event.getTime()));
+		
+		User user = userService.findOne(principal.getName());
+		event.setLeader(user);
 		
 		eventService.save(event);
 		//eventTemplateService.save(eventTemplate);

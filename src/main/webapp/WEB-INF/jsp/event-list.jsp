@@ -29,7 +29,8 @@ $(document).ready(function() {
 			<tr>
 				<td>
 					<a href='<spring:url value="/event/detail/${event.id}.html"/>'>
-						<c:out value="${event.date}" />
+						<fmt:formatDate value="${event.date}" pattern="dd. MM. yyyy" /><br />
+						<fmt:formatDate value="${event.date}" type="time" timeStyle="short" />
 					</a>
 				</td>
 				<td>

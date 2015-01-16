@@ -164,6 +164,7 @@ public class InitDbService {
 			e.printStackTrace();
 		}
 		ev1.setDate(date);
+		ev1.setTime("20:00");
 		ev1.setEventTemplate(et);
 		ev1.setLeader(userAdmin);
 		eventRepository.save(ev1);
@@ -179,6 +180,7 @@ public class InitDbService {
 			e.printStackTrace();
 		}
 		ev2.setDate(date1);
+		ev1.setTime("20:00");
 		ev2.setEventTemplate(et1);
 		ev2.setLeader(userAdmin);
 		eventRepository.save(ev2);

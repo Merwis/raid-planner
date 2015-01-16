@@ -33,9 +33,9 @@ public class CharacterController {
 		model.addAttribute("myCharacter", myCharacterService.findOne(id));
 		MyCharacter myCharacter =  myCharacterService.findOne(id);
 		if (myCharacter.getUser().getLogin() == principal.getName()) {
-			return "character-detail";
+			return "character-edit";
 		} else {
-			return "redirect:/account.html";
+			return "character-detail";
 		}
 	}
 	

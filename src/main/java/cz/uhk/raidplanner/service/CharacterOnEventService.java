@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.CharacterOnEvent;
 import cz.uhk.raidplanner.entity.Event;
+import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.repository.CharacterOnEventRepository;
 import cz.uhk.raidplanner.repository.MyCharacterRepository;
 
@@ -27,5 +28,9 @@ public class CharacterOnEventService {
 	public void save(CharacterOnEvent coe) {
 		characterOnEventRepository.save(coe);
 		
+	}
+
+	public CharacterOnEvent findOneWithEvent(Event event, MyCharacter myCharacter) {
+		return characterOnEventRepository.findByEventAndMyCharacter(event, myCharacter);		
 	}
 }

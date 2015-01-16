@@ -6,7 +6,28 @@
 
 <h1>${myCharacter.name}</h1>
 
-<p>${myCharacter.charClass}</p>
+				<form:form commandName="updateMyCharacter"
+					class="form-horizontal characterFormUpdate">
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Name:</label>
+						<div class="col-sm-10">
+							<form:input path="name" cssClass="form-control" value="${myCharacter.name}"  />
+							<form:errors path="name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="charClass" class="col-sm-2 control-label">Class:</label>
+						<div class="col-sm-10">
+							<form:input path="charClass" cssClass="form-control" value="${myCharacter.charClass}"/>
+							<form:errors path="charClass" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-2">
+							<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+						</div>
+					</div>
+				</form:form>
 
 
 

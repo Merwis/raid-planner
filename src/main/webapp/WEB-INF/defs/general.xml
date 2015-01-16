@@ -43,6 +43,12 @@
 		<put-attribute name="current" value="character-detail" />	
 	</definition>
 	
+	<definition name="character-edit" extends="common">
+		<put-attribute name="title" value="Character detail | Raidplanner" />
+		<put-attribute name="body" value="/WEB-INF/jsp/character-edit.jsp" />
+		<put-attribute name="current" value="character-detail" />	
+	</definition>
+	
 	<definition name="user-register" extends="common">
 		<put-attribute name="title" value="Registration | Raidplanner" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user-register.jsp" />

@@ -5,8 +5,63 @@
 
 
 <h1><c:out value="${event.eventTemplate.name}" /></h1>
+<fmt:formatDate value="${event.date}" pattern="MM/dd/yyyy" var="stringDate" />
+<fmt:formatDate value="${event.date}" type="time" timeStyle="short" var="stringTime" />
 <p><fmt:formatDate value="${event.date}" pattern="dd. MM. yyyy" /></p>
 <p><fmt:formatDate value="${event.date}" type="time" timeStyle="short" /></p>
+
+<security:authentication var="principal" property="principal" />
+<c:if test="${principal.username == event.leader.login}">
+
+ <script>
+$(function() {
+$( "#datepicker" ).datepicker();
+});
+$(function() {
+$("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 'now'  });
+});
+
+</script>
+
+<form:form action="${event.id}/update.html" commandName="eventUpdate" cssClass="form-horizontal registrationForm">
+
+	<div class="form-group">
+		<label for="date" class="col-sm-2 control-label">Datum:</label>
+		<div class="col-sm-10">
+			<form:input path="date" cssClass="form-control" id="datepicker" value="${stringDate}"/>
+			<form:errors path="date" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="time" class="col-sm-2 control-label">Čas:</label>
+		<div class="col-sm-10">
+			<form:input path="time" cssClass="form-control" id="timepicker" value="${stringTime}" />
+			<form:errors path="time" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="eventTemplate" class="col-sm-2 control-label">Šablona:</label>
+		<div class="col-sm-10">
+			<%-- <form:input path="eventTemplate" cssClass="form-control"/> --%>
+			<form:select path="eventTemplate" cssClass="form-control" >
+				<c:forEach items="${et}" var="et">
+				<form:option value="${et.id}" label="${et.name}" />
+				</c:forEach>
+			</form:select>
+			<form:errors path="eventTemplate" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-2">
+			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+		</div>
+	</div>
+
+</form:form>
+</c:if>
+
+
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>

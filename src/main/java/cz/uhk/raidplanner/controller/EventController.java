@@ -60,6 +60,11 @@ public class EventController {
 		return new Event();
 	}
 	
+	@ModelAttribute("eventUpdate") //bindnuti z form:form commandName z user-detail.jsp
+	public Event constructEventUpdate() {
+		return new Event();
+	}
+	
 	@ModelAttribute("characterAvailability") //bindnuti z form:form commandName z user-detail.jsp
 	public CharacterOnEvent constructCharacterOnEvent() {
 		return new CharacterOnEvent();
@@ -122,6 +127,8 @@ public class EventController {
 			model.addAttribute("coeF", coeF);
 		}
 		
+		model.addAttribute("et", eventTemplateService.findAll());
+		
 		return "event-detail";
 	}
 	
@@ -180,6 +187,24 @@ public class EventController {
 		eventService.save(event);
 		//eventTemplateService.save(eventTemplate);
 		return "redirect:/event/list.html";
+	}
+	
+	@RequestMapping(value="/detail/{id}/update", method=RequestMethod.POST)
+	public String doUpdateEvent(Model model, @Valid @ModelAttribute("eventUpdate") Event event, @PathVariable int id, BindingResult result, Principal principal) {
+		if (result.hasErrors()) {
+			return detailEvent(model, id, principal);
+		}
+		
+		DateManipulation dm = new DateManipulation();
+		
+		event.setDate(dm.joinDateAndTime(event.getDate(), event.getTime()));
+		
+		User user = userService.findOne(principal.getName());
+		event.setLeader(user);
+		
+		eventService.save(event);
+		//eventTemplateService.save(eventTemplate);
+		return "redirect:/event/detail/{id}.html";
 	}
 	
 	

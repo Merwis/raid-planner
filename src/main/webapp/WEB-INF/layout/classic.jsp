@@ -20,8 +20,7 @@
  
  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
  
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.4.13/jquery.timepicker.css">
@@ -32,9 +31,7 @@
 </head>
 <body>
 
-<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
-
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ include file="../layout/taglib.jsp" %>
 
 <tilesx:useAttribute name="current" />
 

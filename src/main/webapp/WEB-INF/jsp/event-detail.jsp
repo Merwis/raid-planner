@@ -191,6 +191,8 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 	</tbody>
 </table>
 
+<c:choose>
+<c:when test="${characters != null }">
 <form:form action="${event.id}/characters.html" commandName="characterAvailability" cssClass="form-horizontal registrationForm">
 
 	<div class="form-group">
@@ -247,6 +249,12 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 	</div>
 
 </form:form>
+</c:when>
+<c:otherwise>
+<p>Pro přihlášení se k eventu musíte nejprve <a href='<spring:url value="/account.html" />'>vytvořit postavu</a>.</p>
+</c:otherwise>
+
+</c:choose>
 
 <c:if test="${coeF != null }">
 <form:form action="${event.id}/confirmation.html" commandName="characterConfirmation" cssClass="form-horizontal registrationForm">

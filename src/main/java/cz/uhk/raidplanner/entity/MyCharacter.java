@@ -2,6 +2,7 @@ package cz.uhk.raidplanner.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class MyCharacter {
 	@JoinColumn(name="equip_id")
 	private Equipment equip;
 	
-	@OneToMany(mappedBy="myCharacter")
+	@OneToMany(mappedBy="myCharacter", cascade=CascadeType.REMOVE)
 	private List<CharacterOnEvent> events;
 	
 	

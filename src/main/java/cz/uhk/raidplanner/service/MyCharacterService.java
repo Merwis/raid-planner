@@ -38,7 +38,13 @@ public class MyCharacterService {
 	}
 
 	public MyCharacter findOne(int id) {
-		return myCharacterRepository.findOne(id);
+		MyCharacter myCharacter;
+		try {
+			myCharacter = myCharacterRepository.findOne(id);
+		} catch (Exception e) {
+			myCharacter = null;
+		}
+		return myCharacter ;
 	}
 
 	public List<MyCharacter> findAllByUser(User user) {

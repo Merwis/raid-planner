@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.EventTemplate;
@@ -21,6 +22,7 @@ public class EventTemplateService {
 		return eventTemplateRepository.findAll();
 	}
 
+	@PreAuthorize(value="hasRole('ROLE_ADMIN') OR hasRole('ROLE_OFFICER')")
 	public void delete(int id) {
 		eventTemplateRepository.delete(id);
 	}
@@ -30,6 +32,12 @@ public class EventTemplateService {
 	}
 
 	public EventTemplate findOne(int id) {
-		return eventTemplateRepository.findOne(id);
+		EventTemplate eventTemplate;
+		try {
+			eventTemplate = eventTemplateRepository.findOne(id);
+		} catch (Exception e) {
+			eventTemplate = null;
+		}
+		return eventTemplate;
 	}
 }

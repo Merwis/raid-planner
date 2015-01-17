@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.Event;
@@ -27,20 +28,18 @@ public class EventService {
 		return eventRepository.findAll();
 	}
 
+	@PreAuthorize(value="hasRole('ROLE_ADMIN') OR hasRole('ROLE_OFFICER')")
 	public void delete(int id) {
 		eventRepository.delete(id);
 	}
 
 	public Event findOne(int id) {
-		Event event = eventRepository.findOne(id);
-/*		List<MyCharacter> characters = new ArrayList<MyCharacter>(); // myCharacterRepository.findByEvents(event.getId());
-		
-		MyCharacter char5 = new MyCharacter();
-		char5.setName("Hlavní postavièka 1");
-		char5.setCharClass("Gunslinger");
-		myCharacterRepository.save(char5);
-		characters.add(char5);
-		event.setCharacters(characters);*/
+		Event event;
+		try {
+			event = eventRepository.findOne(id);
+		} catch (Exception e) {
+			event = null;
+		}
 		return event;
 		
 	}

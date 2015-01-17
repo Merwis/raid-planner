@@ -92,6 +92,10 @@ public class EventController {
 		model.addAttribute("event", eventService.findOne(id));
 		Event event = eventService.findOne(id);
 		
+		if (event == null) {
+			return "404";
+		}
+		
 		List<CharacterOnEvent> coe = characterOnEventService.findAllWithEvent(event);
 		List<CharacterOnEvent> coeC = new ArrayList<CharacterOnEvent>();
 		List<CharacterOnEvent> coeA = new ArrayList<CharacterOnEvent>();
@@ -118,8 +122,11 @@ public class EventController {
 		
 		String login = principal.getName();
 		User user = userService.findOne(login);
-		model.addAttribute("characters", myCharacterService.findAllByUser(user));
-		
+		List<MyCharacter> characters = myCharacterService.findAllByUser(user);
+		if (characters.isEmpty() == false) {
+			model.addAttribute("characters", characters);
+		}
+				
 		if (user == event.getLeader()) {
 			List<CharacterOnEvent> coeF = new ArrayList<CharacterOnEvent>();
 			coeF.addAll(coeC);
@@ -138,7 +145,21 @@ public class EventController {
 		if (result.hasErrors()) {
 			return detailEvent(model, id, principal);
 		}
-		characterOnEventService.save(coe);
+		CharacterOnEvent checkCoe = characterOnEventService.findOneWithEvent(coe.getEvent(), coe.getMyCharacter());
+		if (checkCoe == null) {
+			CharacterOnEvent newCoe = new CharacterOnEvent();
+			newCoe.setEvent(coe.getEvent());
+			newCoe.setMyCharacter(coe.getMyCharacter());
+			newCoe.setRole(coe.getRole());
+			newCoe.setStatus(coe.getStatus());
+			characterOnEventService.save(newCoe);
+		} else {
+			checkCoe.setEvent(coe.getEvent());
+			checkCoe.setMyCharacter(coe.getMyCharacter());
+			checkCoe.setRole(coe.getRole());
+			checkCoe.setStatus(coe.getStatus());
+			characterOnEventService.save(checkCoe);
+		}
 		//eventTemplateService.save(eventTemplate);
 		return "redirect:/event/detail/{id}.html";
 	}
@@ -247,7 +268,11 @@ public class EventController {
 	
 	@RequestMapping("/template/detail/{id}")
 	public String detailEventTemplate(Model model, @PathVariable int id) {
-		model.addAttribute("eventTemplate", eventTemplateService.findOne(id));
+		EventTemplate eventTemplate = eventTemplateService.findOne(id);
+		if (eventTemplate == null) {
+			return "404";
+		}
+		model.addAttribute("eventTemplate", eventTemplate);
 		return "event-template-detail";
 	}
 

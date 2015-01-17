@@ -21,7 +21,9 @@ $(document).ready(function() {
 		<tr>
 			<th>Datum</th>
 			<th>Event</th>
+			<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')">
 			<th>Delete</th>
+			</security:authorize>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,9 +40,11 @@ $(document).ready(function() {
 						<c:out value="${event.eventTemplate.name}" />
 					</a>
 				</td>
+				<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')">
 				<td>
 					<a href="<spring:url value="/event/remove/${event.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
 				</td>
+				</security:authorize>
 			</tr>
 		</c:forEach>
 	</tbody>

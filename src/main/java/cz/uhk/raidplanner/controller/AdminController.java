@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cz.uhk.raidplanner.entity.User;
 import cz.uhk.raidplanner.service.UserService;
 
 @Controller
@@ -23,7 +24,11 @@ public class AdminController {
 	
 	@RequestMapping("/{id}")
 	public String detail(Model model, @PathVariable int id) {
-		model.addAttribute("user", userService.findOneWithCharacters(id));
+		User user = userService.findOneWithCharacters(id);
+		if (user == null) {
+			return "404";
+		}
+		model.addAttribute("user", user);
 		return "user-detail";
 	}
 	

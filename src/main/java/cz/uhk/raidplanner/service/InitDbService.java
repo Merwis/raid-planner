@@ -109,7 +109,7 @@ public class InitDbService {
 		userUser.setLogin("test");
 		userUser.setPassword(bc.encode("admin"));
 		List<Role> roles1 = new ArrayList<Role>();
-		roles1.add(roleUser); roles.add(roleOfficer);
+		roles1.add(roleUser); roles1.add(roleOfficer);
 		userUser.setRoles(roles1);
 		userRepository.save(userUser);
 		
@@ -206,7 +206,14 @@ public class InitDbService {
 		coe3.setStatus("notavailable");
 		characterOnEventRepository.save(coe3);
 		
-		
+		User userUser1 = new User();
+		userUser1.setEnabled(true);
+		userUser1.setLogin("uzivatel");
+		userUser1.setPassword(bc.encode("admin"));
+		List<Role> roles2 = new ArrayList<Role>();
+		roles2.add(roleUser);
+		userUser1.setRoles(roles2);
+		userRepository.save(userUser1);
 		
 	}
 }

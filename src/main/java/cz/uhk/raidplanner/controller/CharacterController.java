@@ -32,6 +32,11 @@ public class CharacterController {
 	public String detail(Model model, @PathVariable int id, Principal principal) {
 		model.addAttribute("myCharacter", myCharacterService.findOne(id));
 		MyCharacter myCharacter =  myCharacterService.findOne(id);
+		
+		if (myCharacter == null) {
+			return "404";
+		}
+		
 		if (myCharacter.getUser().getLogin() == principal.getName()) {
 			return "character-edit";
 		} else {

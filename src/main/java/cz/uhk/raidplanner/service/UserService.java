@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,13 +46,19 @@ public class UserService {
 
 	@Transactional
 	public User findOneWithCharacters(int id) {
-		User user = findOne(id);
-		List<MyCharacter> characters = myCharacterRepository.findByUser(user);
-		/*for (MyCharacter myCharacter : characters) {
-			Equipment equip =  equipmentRepository.findByCharacter(myCharacter);
-			myCharacter.setEquip(equip);
-		}*/
-		user.setCharacters(characters);
+		User user;
+		try {
+			user = findOne(id);
+			List<MyCharacter> characters = myCharacterRepository.findByUser(user);
+			/*for (MyCharacter myCharacter : characters) {
+				Equipment equip =  equipmentRepository.findByCharacter(myCharacter);
+				myCharacter.setEquip(equip);
+			}*/
+			user.setCharacters(characters);
+		} catch (Exception e) {
+			user = null;
+		}
+		
 		return user;
 	}
 
@@ -69,7 +76,8 @@ public class UserService {
 		User user = userRepository.findByLogin(login);
 		return findOneWithCharacters(user.getId());
 	}
-
+	
+	@PreAuthorize(value="hasRole('ROLE_ADMIN')")
 	public void delete(int id) {
 		userRepository.delete(id);
 	}

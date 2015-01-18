@@ -48,6 +48,9 @@ public class User {
 	@OneToMany(mappedBy="leader")
 	private List<Event> eventLeader;
 	
+	@OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+	private List<Actuality> actualities;
+	
 	public List<Event> getEventLeader() {
 		return eventLeader;
 	}
@@ -119,5 +122,14 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public List<Actuality> getActualities() {
+		return actualities;
+	}
+
+	public void setActualities(List<Actuality> actualities) {
+		this.actualities = actualities;
+	}
+	
 	
 }

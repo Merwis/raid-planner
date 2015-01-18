@@ -52,7 +52,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              <security:authorize access="isAnonymous()">
               <li class="${ current == 'index' ? 'active' : '' }"><a href='<spring:url value="/" />'>Úvod</a></li>
+              </security:authorize>
+              <security:authorize access="isAuthenticated()">
+              <li class="${ current == 'index' ? 'active' : '' }"><a href='<spring:url value="/news.html" />'>Úvod</a></li>
+              </security:authorize>
               <security:authorize access="hasRole('ROLE_ADMIN')">
               <li class="${ current == 'users' ? 'active' : '' }"><a href='<spring:url value="/users.html" />'>Uživatelé</a></li>
               </security:authorize>

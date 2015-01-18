@@ -8,5 +8,6 @@
 		<class>cz.uhk.raidplanner.entity.EventTemplate</class>
 		<class>cz.uhk.raidplanner.entity.Event</class>
 		<class>cz.uhk.raidplanner.entity.CharacterOnEvent</class>
+		<class>cz.uhk.raidplanner.entity.Actuality</class>
 	</persistence-unit>
 </persistence>

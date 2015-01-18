@@ -199,13 +199,6 @@ public class InitDbService {
 		coe2.setStatus("available");
 		characterOnEventRepository.save(coe2);
 		
-		CharacterOnEvent coe3 = new CharacterOnEvent();
-		coe3.setEvent(ev1);
-		coe3.setMyCharacter(char2);
-		coe3.setRole("Tank");
-		coe3.setStatus("notavailable");
-		characterOnEventRepository.save(coe3);
-		
 		User userUser1 = new User();
 		userUser1.setEnabled(true);
 		userUser1.setLogin("uzivatel");

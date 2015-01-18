@@ -71,7 +71,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>oemInViewFilter</filter-name>
-		<url-pattern>/event/*</url-pattern>
+		<url-pattern>/event/detail/*</url-pattern>
+		<url-pattern>/users/*</url-pattern>
 	</filter-mapping>
 	
 	<context-param>

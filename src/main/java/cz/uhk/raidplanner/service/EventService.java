@@ -1,6 +1,5 @@
 package cz.uhk.raidplanner.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import cz.uhk.raidplanner.entity.Event;
-import cz.uhk.raidplanner.entity.MyCharacter;
 import cz.uhk.raidplanner.repository.EventRepository;
 import cz.uhk.raidplanner.repository.MyCharacterRepository;
 

@@ -1,7 +1,6 @@
 package cz.uhk.raidplanner.controller;
 
 import java.security.Principal;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,6 @@ public class UserController {
 	
 	@Autowired
 	private MyCharacterService myCharacterService;
-	
-	
 	
 	@ModelAttribute("myCharacter") //bindnuti z form:form commandName z user-detail.jsp
 	public MyCharacter constructMyCharacter() {
@@ -89,8 +86,7 @@ public class UserController {
 		}
 		userService.update(user1);
 		return "redirect:/account.html";
-	}
-	
+	}	
 	
 }
 

@@ -15,8 +15,30 @@ $(document).ready(function() {
 		$("#modalRemove").modal();
 	});
 });
-
 </script>
+
+<c:forEach items="${user.roles}" var="role">
+	<p>${role.name}</p>
+</c:forEach>
+
+<form:form action="${user.id}/editroles.html"
+	cssClass="form-horizontal registrationForm">
+	<div class="form-group">
+		<label for="role" class="col-sm-2 control-label">Role:</label>
+		<div class="col-sm-10">
+			<select name="role" class="form-control">
+				<option value="u">User</option>
+				<option value="o" label="Officer">Officer</option>
+				<option value="a" label="Admin">Admin</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-2">
+			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+		</div>
+	</div>
+</form:form>
 
 <div role="tabpanel">
 

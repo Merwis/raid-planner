@@ -37,7 +37,7 @@ public class CharacterController {
 			return "404";
 		}
 		
-		if (myCharacter.getUser().getLogin() == principal.getName()) {
+		if (myCharacter.getUser().getLogin().toString().equals(principal.getName().toString())) {
 			return "character-edit";
 		} else {
 			return "character-detail";
@@ -52,6 +52,8 @@ public class CharacterController {
 		MyCharacter char1 = myCharacterService.findOne(id);
 		char1.setName(myCharacter.getName());
 		char1.setCharClass(myCharacter.getCharClass());
+		char1.setLevel(myCharacter.getLevel());
+		char1.setRace(myCharacter.getRace());
 		myCharacterService.update(char1);
 		return "redirect:/account.html";
 	}

@@ -82,7 +82,7 @@ public class UserService {
 		userRepository.delete(id);
 	}
 	
-	public void update(@P("user") User user) {
+	public void update(User user) {
 		userRepository.save(user);	
 	}
 

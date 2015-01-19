@@ -48,7 +48,7 @@ public class MyCharacterService {
 	}
 
 	public List<MyCharacter> findAllByUser(User user) {
-		return myCharacterRepository.findByUser(user);
+		return myCharacterRepository.findByUserOrderByIdAsc(user);
 	}
 	
 	

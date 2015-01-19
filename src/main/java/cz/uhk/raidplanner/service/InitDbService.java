@@ -83,6 +83,9 @@ public class InitDbService {
 		Equipment eq1 = new Equipment();
 		eq1.setChest("Gunslingerùv kabát");
 		eq1.setMainhand("Blasterová pistole");
+		eq1.setOffhand("Blasterová pistole");
+		eq1.setHead("Klobouk");
+		eq1.setLegs("Kalhoty");
 		equipmentRepository.save(eq1);
 		
 		MyCharacter char1 = new MyCharacter();

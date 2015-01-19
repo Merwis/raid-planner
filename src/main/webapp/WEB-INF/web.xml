@@ -73,6 +73,7 @@
 		<filter-name>oemInViewFilter</filter-name>
 		<url-pattern>/event/detail/*</url-pattern>
 		<url-pattern>/users/*</url-pattern>
+		<url-pattern>/character/*</url-pattern>
 	</filter-mapping>
 	
 	<context-param>

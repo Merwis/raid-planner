@@ -18,6 +18,8 @@ public interface MyCharacterRepository extends JpaRepository<MyCharacter, Intege
 
 	List<MyCharacter> findByEventsIn(Event event);
 	
+	List<MyCharacter> findByUserOrderByIdAsc(User user);
+	
 //	public final static String FIND_CHARACTERS = "select c.id from Mycharacter c " +
 //											   "inner join mycharacter_event p1 on c.id = p1.mycharacters_id " + 
 //											   //"join event on mycharacter_event.events_id = event.id " +

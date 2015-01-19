@@ -19,9 +19,16 @@ public class Actuality {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User author;
-	private Date date;
+	private Date published;
+	private Date edited;
 	
 	
+	public Date getEdited() {
+		return edited;
+	}
+	public void setEdited(Date edited) {
+		this.edited = edited;
+	}
 	public int getId() {
 		return id;
 	}
@@ -46,11 +53,11 @@ public class Actuality {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	public Date getDate() {
-		return date;
+	public Date getPublished() {
+		return published;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPublished(Date date) {
+		this.published = date;
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class EventService {
 	private MyCharacterRepository myCharacterRepository;
 
 	public List<Event> findAll() {
-		return eventRepository.findAll();
+		return eventRepository.findAllByOrderByDateDesc(new PageRequest(0, 20));
 	}
 
 	@PreAuthorize(value="hasRole('ROLE_ADMIN') OR hasRole('ROLE_OFFICER')")

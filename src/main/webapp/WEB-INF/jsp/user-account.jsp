@@ -6,7 +6,7 @@
 
 <h1>${user.login}</h1>
 
-<a href='<spring:url value="/user/edit/${user.id}.html"/>' class="btn">Upravit</a>
+<a href='<spring:url value="/user/edit/${user.id}.html"/>' class="btn btn-default">Upravit</a>
 
 <br />
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
 				<h2><c:out value="${character.name}" /></h2>
 				<p>
 				<a href="<spring:url value="/character/remove/${character.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
-				<a href='<spring:url value="/character/${character.id}.html"/>' class="btn">Upravit</a>
+				<a href='<spring:url value="/character/${character.id}.html"/>' class="btn btn-default">Upravit</a>
 				
 				<c:out value="${character.charClass}" /></p>
 

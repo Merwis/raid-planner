@@ -300,7 +300,7 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 </form:form>
 </c:if>
-<c:forEach items="${coeF}" var="coe">
+<%-- <c:forEach items="${coeF}" var="coe">
 <c:out value="${coe.myCharacter.name}" /><br />
 <c:out value="${coe.status}" /><br />
 <c:out value="${coe.role}" /><br />
@@ -310,7 +310,7 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 <c:out value="${coeC.myCharacter.name}" /><br />
 <c:out value="${coeC.status}" /><br />
 <c:out value="${coeC.role}" /><br />
-</c:forEach> 
+</c:forEach>  --%>
 
 
 

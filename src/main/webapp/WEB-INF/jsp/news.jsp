@@ -15,9 +15,15 @@ Nová aktualita
 
 <c:forEach items="${actualities}" var="actuality">
 <h2>${actuality.header}</h2>
+<a class="btn btn-default" href='<spring:url value="news/edit/${actuality.id}.html" />'>Upravit</a>
+<a href="<spring:url value="news/remove/${actuality.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
 <p>
-	Od: ${actuality.author.login} | dne: <fmt:formatDate value="${actuality.date}" dateStyle="short" />
-	 v <fmt:formatDate value="${actuality.date}" type="time" timeStyle="short" /> hod.
+	Od: ${actuality.author.login} | dne: <fmt:formatDate value="${actuality.published}" dateStyle="short" />
+	 v <fmt:formatDate value="${actuality.published}" type="time" timeStyle="short" /> hod.
+	 <c:if test="${actuality.edited != null }"> 
+	  | upraveno dne: <fmt:formatDate value="${actuality.edited}" dateStyle="short" />
+	 v <fmt:formatDate value="${actuality.edited}" type="time" timeStyle="short" />	 
+	 </c:if>
 </p>
 <p>${actuality.text}</p>
 </c:forEach>
@@ -59,6 +65,25 @@ Nová aktualita
   </div>
 </div>
 </form:form>
+
+<!-- Modal -->
+<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Odstranit aktualitu</h4>
+      </div>
+      <div class="modal-body">
+        Opravdu chcete položku odstranit?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Storno</button>
+        <a href="" class="btn btn-danger removeBtn">Odstranit</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br /><br />
 

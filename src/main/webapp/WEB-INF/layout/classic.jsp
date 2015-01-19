@@ -75,6 +75,8 @@
               <li class="${ current == 'register' ? 'active' : '' }"><a href='<spring:url value="/register.html" />'>Registrace</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
+              <security:authentication var="principal" property="principal" />
+              <li><a href='<spring:url value="/account.html" />'><c:out value="${principal.username}" /></a></li>
               <li><a href='<spring:url value="/logout" />'>Logout</a></li>
               </security:authorize>             
             </ul>

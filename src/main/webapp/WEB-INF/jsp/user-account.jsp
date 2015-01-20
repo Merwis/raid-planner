@@ -87,7 +87,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Storno</button>
-        <input type="submit" class="btn btn-primary" value="Aktualizovat" />
+        <input type="submit" class="btn btn-primary" value="Uložit" />
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>

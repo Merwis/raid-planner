@@ -16,7 +16,8 @@ $(document).ready(function() {
 
 <h1>Seznam uživatelů</h1>
 
-<table class="table table-bordered table-hover table-striped table-autowidth table-centered">
+<table
+	class="table table-bordered table-hover table-striped table-autowidth table-centered">
 	<thead>
 		<tr>
 			<th>User login</th>
@@ -26,14 +27,12 @@ $(document).ready(function() {
 	<tbody>
 		<c:forEach items="${users}" var="user">
 			<tr>
-				<td>
-					<a href='<spring:url value="/users/${user.id}.html"/>'>
+				<td><a href='<spring:url value="/users/${user.id}.html"/>'>
 						<c:out value="${user.login}" />
-					</a>
-				</td>
-				<td>
-					<a href="<spring:url value="/users/remove/${user.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
-				</td>
+				</a></td>
+				<td><a
+					href="<spring:url value="/users/remove/${user.id}.html" />"
+					class="btn btn-danger triggerRemove">Odstranit</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

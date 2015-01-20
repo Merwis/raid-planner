@@ -14,20 +14,20 @@ Nová aktualita
 </security:authorize>
 
 <c:forEach items="${actualities}" var="actuality">
-<h2>${actuality.header}</h2>
-<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')">
-<a class="btn btn-default" href='<spring:url value="news/edit/${actuality.id}.html" />'>Upravit</a>
-<a href="<spring:url value="news/remove/${actuality.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
-</security:authorize>
-<p>
+	<h2><c:out value="${actuality.header}" /></h2>
+	<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')">
+		<a class="btn btn-default" href='<spring:url value="news/edit/${actuality.id}.html" />'>Upravit</a>
+		<a href="<spring:url value="news/remove/${actuality.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
+	</security:authorize>
+	<p>
 	Od: ${actuality.author.login} | dne: <fmt:formatDate value="${actuality.published}" dateStyle="short" />
 	 v <fmt:formatDate value="${actuality.published}" type="time" timeStyle="short" /> hod.
 	 <c:if test="${actuality.edited != null }"> 
 	  | upraveno dne: <fmt:formatDate value="${actuality.edited}" dateStyle="short" />
 	 v <fmt:formatDate value="${actuality.edited}" type="time" timeStyle="short" />	 
 	 </c:if>
-</p>
-<p>${actuality.text}</p>
+	</p>
+	<p><c:out value="${actuality.text}" /></p>
 </c:forEach>
 
 <form:form commandName="actualityAdd" cssClass="form-horizontal actualityForm">

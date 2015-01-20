@@ -4,7 +4,7 @@
 <%@ include file="../layout/taglib.jsp" %>
 
 
-<h1>${user.login}</h1>
+<h1><c:out value="${user.login}" /></h1>
 
 <h2>Úprava osobních informací</h2>
 

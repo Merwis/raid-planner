@@ -8,11 +8,9 @@
 
 <p><c:out value="${eventTemplate.note}" /></p>
 
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-hover table-striped table-autowidth">
 	<thead>
-		<tr>
-			<th colspan="2"><c:out value="${eventTemplate.note}" /></th>
-		</tr>
+
 	</thead>
 	<tbody>
 			<tr>
@@ -39,35 +37,35 @@
 
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Název:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-2">
 			<form:input path="name" cssClass="form-control" value="${eventTemplate.name}"/>
 			<form:errors path="name" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="minLvl" class="col-sm-2 control-label">Min. level:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-2">
 			<form:input path="minLvl" cssClass="form-control" value="${eventTemplate.minLvl}"/>
 			<form:errors path="minLvl" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="maxPlayers" class="col-sm-2 control-label">Max. hráčů:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-2">
 			<form:input path="maxPlayers" cssClass="form-control" value="${eventTemplate.maxPlayers}"/>
 			<form:errors path="maxPlayers" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="note" class="col-sm-2 control-label">Poznámka:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-5">
 			<form:input path="note" cssClass="form-control" value="${eventTemplate.note}"/>
 			<form:errors path="note" />
 		</div>
 	</div>
 
 	<div class="form-group">
-		<div class="col-sm-2">
+		<div class="col-sm-2 col-md-offset-2">
 			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
 		</div>
 	</div>

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import cz.uhk.raidplanner.entity.Actuality;
 import cz.uhk.raidplanner.entity.CharacterOnEvent;
 import cz.uhk.raidplanner.entity.Equipment;
 import cz.uhk.raidplanner.entity.Event;
@@ -55,6 +56,9 @@ public class InitDbService {
 	
 	@Autowired
 	private CharacterOnEventRepository characterOnEventRepository;
+	
+	@Autowired
+	private ActualityService actualityService;
 	
 	@PostConstruct
 	public void init() {
@@ -142,15 +146,15 @@ public class InitDbService {
 		
 		EventTemplate et = new EventTemplate();
 		et.setName("Eternity Vault");
-		et.setMaxPlayers(8);
-		et.setMinLvl(50);
+		et.setMaxPlayers("8");
+		et.setMinLvl("50");
 		et.setNote("Popisek raidu");
 		eventTemplateRepository.save(et);
 		
 		EventTemplate et1 = new EventTemplate();
 		et1.setName("Karraga's Pallace");
-		et1.setMaxPlayers(8);
-		et1.setMinLvl(50);
+		et1.setMaxPlayers("8");
+		et1.setMinLvl("50");
 		et1.setNote("Popisek raidu");
 		eventTemplateRepository.save(et1);
 		
@@ -210,6 +214,13 @@ public class InitDbService {
 		roles2.add(roleUser);
 		userUser1.setRoles(roles2);
 		userRepository.save(userUser1);
+		
+		Actuality act = new Actuality();
+		act.setAuthor(userAdmin);
+		act.setPublished(new Date());
+		act.setHeader("První nadpis");
+		act.setText("Text úvodní zprávy, bla bla bla...");
+		actualityService.save(act);
 		
 	}
 }

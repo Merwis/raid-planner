@@ -89,26 +89,6 @@ $(document).ready(function() {
 		$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
 		$("#modalRemove").modal();
 	});
-	$(".characterForm").validate(
-			{
-				rules: {
-					name: {
-						required : true,
-					}
-				},
-				highlight: function(element) {
-					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-				},
-				unhighlight: function(element) {
-					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-				},
-				messages: {
-					name: {
-						required: "Jméno musí být vyplněno"
-					}
-				}
-			}		
-		);
 });
 
 </script>
@@ -131,10 +111,35 @@ $(document).ready(function() {
 				<a href="<spring:url value="/character/remove/${character.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
 				<a href='<spring:url value="/character/${character.id}.html"/>' class="btn btn-default">Upravit</a>
 				
-				<c:out value="${character.charClass}" /><br />
-				<c:out value="${character.race}" /><br />
-				<c:out value="${character.level}" /><br /></p>
+				<table class="table table-bordered table-hover table-striped table-autowidth">
+					<tr>
+						<th>
+							Povolání
+						</th>
+						<td>
+							<c:out value="${character.charClass}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Rasa
+						</th>
+						<td>
+							<c:out value="${character.race}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Level
+						</th>
+						<td>
+							<c:out value="${character.level}" />
+						</td>
+					</tr>
+				</table></p>
 
+	<h3>Výbava</h3>
+	
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>

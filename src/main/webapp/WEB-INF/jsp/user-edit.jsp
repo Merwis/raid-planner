@@ -6,11 +6,13 @@
 
 <h1>${user.login}</h1>
 
+<h2>Úprava osobních informací</h2>
+
 <form:form commandName="updateUser" cssClass="form-horizontal userEditForm">
 
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">E-mail:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-4">
 			<form:input path="email" cssClass="form-control" value="${user.email}" />
 			<form:errors path="email" />
 		</div>
@@ -18,19 +20,21 @@
 	
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Jméno:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<form:input path="name" cssClass="form-control" value="${user.name}" />
 			<form:errors path="name" />
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<div class="col-sm-2">
+		<div class="col-sm-2 col-md-offset-2">
 			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
 </form:form>
+
+<h2>Změna hesla</h2>
 
 <c:if test="${failed eq true }">
 	<div class="alert alert-danger">Špatně zadané původní heslo.</div>
@@ -40,27 +44,27 @@
 
 	<div class="form-group">
 		<label for="oldpassword" class="col-sm-2 control-label">Staré heslo:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<input type="password" name="oldpassword" class="form-control" />
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label for="password" class="col-sm-2 control-label">Heslo:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<form:password path="password" cssClass="form-control" />
 			<form:errors path="password" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="password" class="col-sm-2 control-label">Heslo znovu:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<input type="password" name="password_again" id="password_again" class="form-control" />
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<div class="col-sm-2">
+		<div class="col-sm-2 col-md-offset-2">
 			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
@@ -85,7 +89,8 @@ $(document).ready(function() {
 			},
 			messages: {
 				email: {
-					email: "Vyplňte platný e-mail",
+					required: "E-mail musí být vyplněn",
+					email: "Vyplňte platný e-mail"
 				}
 			}
 		}		

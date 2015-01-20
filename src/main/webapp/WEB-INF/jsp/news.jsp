@@ -15,8 +15,10 @@ Nová aktualita
 
 <c:forEach items="${actualities}" var="actuality">
 <h2>${actuality.header}</h2>
+<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')">
 <a class="btn btn-default" href='<spring:url value="news/edit/${actuality.id}.html" />'>Upravit</a>
 <a href="<spring:url value="news/remove/${actuality.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
+</security:authorize>
 <p>
 	Od: ${actuality.author.login} | dne: <fmt:formatDate value="${actuality.published}" dateStyle="short" />
 	 v <fmt:formatDate value="${actuality.published}" type="time" timeStyle="short" /> hod.
@@ -103,6 +105,7 @@ $(document).ready(function() {
 					},
 					text: {
 						required : true,
+						maxlength : 255
 					}
 				},
 				highlight: function(element) {
@@ -116,7 +119,8 @@ $(document).ready(function() {
 						required: "Nadpis musí být vyplněn"
 					},
 					text: {
-						required: "Text nesmí být prázdný"
+						required: "Text nesmí být prázdný",
+						maxlength: "Text může mít maximálně 255 znaků"
 					}
 				}
 			}		

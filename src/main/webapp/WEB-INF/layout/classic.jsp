@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<%@ include file="../layout/taglib.jsp" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
@@ -28,10 +28,12 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 
-<%@ include file="../layout/taglib.jsp" %>
+
 
 <tilesx:useAttribute name="current" />
 

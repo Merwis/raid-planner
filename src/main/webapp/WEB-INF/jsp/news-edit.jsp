@@ -3,11 +3,14 @@
 
 <%@ include file="../layout/taglib.jsp" %>
 
+<h1>Úprava novinky</h1>
+<br /><br />
+
 <form:form commandName="actualityEdit" cssClass="form-horizontal registrationForm">
 
 	<div class="form-group">
 		<label for="header" class="col-sm-2 control-label">Nadpis:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-4">
 			<form:input path="header" cssClass="form-control" value="${actuality.header}"/>
 			<form:errors path="header" />
 		</div>
@@ -21,7 +24,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Save" class="btn btn-lg btn-primary col-md-offset-10" />
 		</div>
 	</div>
 
@@ -32,17 +35,13 @@ $(document).ready(function() {
 	$(".registrationForm").validate(
 		{
 			rules: {
-				name: {
+				header: {
 					required : true,
 				},
-				minLvl: {
+				text: {
 					required : true,
-					number : true
-				},
-				maxPlayers: {
-					required : true,
-					number : true
-				},
+					maxlength : 255
+				}
 			},
 			highlight: function(element) {
 				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -51,17 +50,13 @@ $(document).ready(function() {
 				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
 			},
 			messages: {
-				name: {
-					required: "Název musí být vyplněn"
+				header: {
+					required: "Nadpis musí být vyplněn"
 				},
-				minLvl: {
-					number: "Vyplňte číslo",
-					required: "Minimální level musí být vyplněn"
-				},
-				maxPlayers: {
-					number: "Vyplňte číslo",
-					required: "Maximální počet hráčů musí být vyplněn"
-				},
+				text: {
+					required: "Text nesmí být prázdný",
+					maxlength: "Text může mít maximálně 255 znaků"
+				}
 			}
 		}		
 	);

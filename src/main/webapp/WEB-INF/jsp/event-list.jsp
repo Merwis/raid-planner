@@ -14,8 +14,10 @@ $(document).ready(function() {
 
 </script>
 
-<a class="btn btn-default" href='<spring:url value="/event/create.html"/>'>Vytvořit event</a>
+<h1>Plánované eventy</h1>
 
+<a class="btn btn-default" href='<spring:url value="/event/create.html"/>'>Vytvořit event</a>
+<br /><br />
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>

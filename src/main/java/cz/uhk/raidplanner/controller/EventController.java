@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cz.uhk.raidplanner.entity.CharacterOnEvent;
 import cz.uhk.raidplanner.entity.Event;
@@ -190,9 +191,11 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String doAddEvent(Model model, @Valid @ModelAttribute("eventCreate") Event event, BindingResult result, Principal principal) {
+	public String doAddEvent(Model model, @Valid @ModelAttribute("eventCreate") Event event, BindingResult result, Principal principal,
+			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return showCreateEvent(model);
+			redirectAttributes.addFlashAttribute("failed", true);
+			return "redirect:/event/create.html";
 		}
 		
 		DateManipulation dm = new DateManipulation();
@@ -207,10 +210,12 @@ public class EventController {
 		return "redirect:/event/list.html";
 	}
 	
-	@RequestMapping(value="/detail/{id}/update", method=RequestMethod.POST)
-	public String doUpdateEvent(Model model, @Valid @ModelAttribute("eventUpdate") Event event, @PathVariable int id, BindingResult result, Principal principal) {
+	@RequestMapping(value="/detail/{id}", method=RequestMethod.POST)
+	public String doUpdateEvent(Model model, @Valid @ModelAttribute("eventUpdate") Event event, BindingResult result, @PathVariable int id,  
+			Principal principal, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return detailEvent(model, id, principal);
+			redirectAttributes.addFlashAttribute("failed", true);
+			return "redirect:/event/detail/{id}.html";
 		}
 		
 		DateManipulation dm = new DateManipulation();

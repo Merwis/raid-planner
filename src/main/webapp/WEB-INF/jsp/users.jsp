@@ -14,7 +14,9 @@ $(document).ready(function() {
 
 </script>
 
-<table class="table table-bordered table-hover table-striped">
+<h1>Seznam uživatelů</h1>
+
+<table class="table table-bordered table-hover table-striped table-autowidth table-centered">
 	<thead>
 		<tr>
 			<th>User login</th>

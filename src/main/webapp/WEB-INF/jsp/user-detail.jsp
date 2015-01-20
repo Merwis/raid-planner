@@ -16,16 +16,29 @@ $(document).ready(function() {
 	});
 });
 </script>
-
-<c:forEach items="${user.roles}" var="role">
-	<p>${role.name}</p>
-</c:forEach>
-
+<table class="table table-bordered table-hover table-striped table-autowidth">
+	<thead>
+		<tr>
+			<th>
+				Role uživatele
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${user.roles}" var="role">
+			<tr>
+				<td>
+					<p>${role.name}</p>
+				</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
 <form:form action="${user.id}/editroles.html"
 	cssClass="form-horizontal registrationForm">
 	<div class="form-group">
 		<label for="role" class="col-sm-2 control-label">Role:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<select name="role" class="form-control">
 				<option value="u">User</option>
 				<option value="o" label="Officer">Officer</option>
@@ -34,12 +47,13 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-sm-2">
+		<div class="col-sm-2 col-md-offset-2">
 			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 </form:form>
-
+<br /><br />
+<h2>Postavy</h2>
 <div role="tabpanel">
 
   <!-- Nav tabs -->
@@ -57,19 +71,52 @@ $(document).ready(function() {
 				<p>
 				<a href="<spring:url value="/character/remove/${character.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
 				
-				<c:out value="${character.charClass}" /></p>
+				<table class="table table-bordered table-hover table-striped table-autowidth">
+					<tr>
+						<th>
+							Povolání
+						</th>
+						<td>
+							<c:out value="${character.charClass}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Rasa
+						</th>
+						<td>
+							<c:out value="${character.race}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Level
+						</th>
+						<td>
+							<c:out value="${character.level}" />
+						</td>
+					</tr>
+				</table>
+				
+				</p>
 
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
-							<th>Chest piece</th>
+							<th>Chest</th>
+							<th>Head</th>
+							<th>Legs</th>
 							<th>Main hand</th>
+							<th>Off hand</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><c:out value="${character.equip.chest}" /></td>
+							<td><c:out value="${character.equip.head}" /></td>
+							<td><c:out value="${character.equip.legs}" /></td>
 							<td><c:out value="${character.equip.mainhand}" /></td>
+							<td><c:out value="${character.equip.offhand}" /></td>
 						</tr>
 					</tbody>
 				</table>

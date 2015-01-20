@@ -6,65 +6,55 @@
 
 <h1>${myCharacter.name}</h1>
 
-<p>${myCharacter.charClass}</p>
+<div>				
+				<table class="table table-bordered table-hover table-striped table-autowidth">
+					<tr>
+						<th>
+							Povolání
+						</th>
+						<td>
+							<c:out value="${myCharacter.charClass}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Rasa
+						</th>
+						<td>
+							<c:out value="${myCharacter.race}" />
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Level
+						</th>
+						<td>
+							<c:out value="${myCharacter.level}" />
+						</td>
+					</tr>
+				</table></p>
 
-
-
-<%-- <div role="tabpanel">
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-  	<c:forEach items="${user.characters}" var="character">
-    	<li role="presentation"><a href="#character_${character.id}" aria-controls="profile" role="tab" data-toggle="tab"><c:out value="${character.name}" /></a></li>
-	</c:forEach>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-  	<c:forEach items="${user.characters}" var="character">
-    	<div role="tabpanel" class="tab-pane" id="character_${character.id}">
-				<h2><c:out value="${character.name}" /></h2>
-				<p>
-				<a href="<spring:url value="/character/remove/${character.id}.html" />" class="btn btn-danger triggerRemove">Odstranit</a>
-				
-				<c:out value="${character.charClass}" /></p>
-
+	<h3>Výbava</h3>
+	
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
-							<th>Chest piece</th>
+							<th>Chest</th>
+							<th>Head</th>
+							<th>Legs</th>
 							<th>Main hand</th>
+							<th>Off hand</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><c:out value="${character.equip.chest}" /></td>
-							<td><c:out value="${character.equip.mainhand}" /></td>
+							<td><c:out value="${myCharacter.equip.chest}" /></td>
+							<td><c:out value="${myCharacter.equip.head}" /></td>
+							<td><c:out value="${myCharacter.equip.legs}" /></td>
+							<td><c:out value="${myCharacter.equip.mainhand}" /></td>
+							<td><c:out value="${myCharacter.equip.offhand}" /></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-    </c:forEach>
-  </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Odstranit postavu</h4>
-      </div>
-      <div class="modal-body">
-        Opravdu chcete položku odstranit?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Storno</button>
-        <a href="" class="btn btn-danger removeBtn">Odstranit</a>
-      </div>
-    </div>
-  </div>
-</div> --%>
 

@@ -16,9 +16,11 @@ $(document).ready(function() {
 
 </script>
 
+<h1>Šablony eventů</h1>
+
 <a href='<spring:url value="/event/template/create.html"/>' class="btn btn-default">Vytvořit novou šablonu</a>
 
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-hover table-striped table-autowidth table-centered">
 	<thead>
 		<tr>
 			<th>Šablony eventů</th>

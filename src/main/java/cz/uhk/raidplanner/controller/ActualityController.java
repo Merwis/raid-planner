@@ -86,7 +86,7 @@ public class ActualityController {
 	@RequestMapping("/remove/{id}")
 	public String removeActuality(@PathVariable int id) {
 		actualityService.delete(id);
-		return "redirect:news.html";
+		return "redirect:/news.html";
 	}
 	
 	

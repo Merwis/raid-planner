@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Actuality {
@@ -14,7 +15,9 @@ public class Actuality {
 	@Id
 	@GeneratedValue
 	private int id;
+	@Size(max=255, message="Nesmí být delší než 255 znakù")
 	private String header;
+	@Size(max=255, message="Nesmí být delší než 255 znakù")
 	private String text;
 	@ManyToOne
 	@JoinColumn(name="user_id")

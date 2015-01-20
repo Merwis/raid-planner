@@ -13,25 +13,31 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 </script>
 
+<h1>Vypsání eventu</h1>
+
 <form:form commandName="eventCreate" cssClass="form-horizontal registrationForm">
+
+	<c:if test="${failed eq true }">
+		<div class="alert alert-danger">Neplatné datum! Doporučujeme zapnout javascript.</div>
+	</c:if>
 
 	<div class="form-group">
 		<label for="date" class="col-sm-2 control-label">Datum:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-2">
 			<form:input path="date" cssClass="form-control" id="datepicker"/>
-			<form:errors path="date" />
+			<form:errors path="date"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="time" class="col-sm-2 control-label">Čas:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-2">
 			<form:input path="time" cssClass="form-control" id="timepicker" />
 			<form:errors path="time" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="eventTemplate" class="col-sm-2 control-label">Šablona:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-3">
 			<%-- <form:input path="eventTemplate" cssClass="form-control"/> --%>
 			<form:select path="eventTemplate" cssClass="form-control" >
 				<c:forEach items="${et}" var="et">
@@ -44,7 +50,7 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 	<div class="form-group">
 		<div class="col-sm-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Save" class="btn btn-lg btn-primary col-md-offset-2" />
 		</div>
 	</div>
 
@@ -76,6 +82,9 @@ $(document).ready(function() {
 				date: {
 					required: "Datum musí být vyplněno",
 					date: "Neplatné datum"
+				},
+				time: {
+					required: "Čas musí být vyplněn"
 				},
 				eventTemplate: {
 					required: "Šablona musí být vyplněna"

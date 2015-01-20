@@ -38,9 +38,45 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-2 col-md-offset-2">
-							<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+							<input type="submit" value="Aktualizovat" class="btn btn-lg btn-primary" />
 						</div>
 					</div>
 				</form:form>
+				
+<script type="text/javascript">
+$(document).ready(function() {
+		$(".characterFormUpdate").validate(
+				{
+					rules: {
+						name: {
+							minlength : 1,
+							required : true
+						},
+						level: {
+							required : true,
+							number : true
+						}
+					},
+					highlight: function(element) {
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					unhighlight: function(element) {
+						$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+					},
+					messages: {
+						name: {
+							minlength: "Jméno musí obsahovat alespoň 1 znak",
+							required: "Jméno nesmí být prázdné"
+						},
+						level: {
+							number: "Level musí být číslo",
+							required: "Level je potřeba znát"
+						}
+					}
+				}		
+			);
+});
+
+</script>
 
 

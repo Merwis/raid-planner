@@ -124,7 +124,7 @@ public class EventController {
 			model.addAttribute("characters", characters);
 		}
 				
-		if (user == event.getLeader()) {
+		if (user.getLogin().equals(event.getLeader().getLogin())) {
 			List<CharacterOnEvent> coeF = new ArrayList<CharacterOnEvent>();
 			coeF.addAll(coeC);
 			coeF.addAll(coeA);

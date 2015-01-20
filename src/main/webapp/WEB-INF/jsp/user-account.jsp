@@ -16,8 +16,24 @@
 
 <br />
 
-<p><c:out value="${user.name}" /></p>
-<p><c:out value="${user.email}" /></p>
+<table class="table table-bordered table-hover table-striped table-autowidth">
+	<tr>
+		<th>
+			E-mail
+		</th>
+		<td>
+			<c:out value="${user.email}" />
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Jméno
+		</th>
+		<td>
+			<c:out value="${user.name}" />
+		</td>
+	</tr>
+</table>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -70,8 +86,8 @@
 	
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" value="Save" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">Storno</button>
+        <input type="submit" class="btn btn-primary" value="Aktualizovat" />
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
@@ -89,6 +105,36 @@ $(document).ready(function() {
 		$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
 		$("#modalRemove").modal();
 	});
+		$(".characterForm").validate(
+				{
+					rules: {
+						name: {
+							minlength : 1,
+							required : true
+						},
+						level: {
+							required : true,
+							number : true
+						}
+					},
+					highlight: function(element) {
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					unhighlight: function(element) {
+						$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+					},
+					messages: {
+						name: {
+							minlength: "Jméno musí obsahovat alespoň 1 znak",
+							required: "Jméno nesmí být prázdné"
+						},
+						level: {
+							number: "Level musí být číslo",
+							required: "Level je potřeba znát"
+						}
+					}
+				}		
+			);
 });
 
 </script>

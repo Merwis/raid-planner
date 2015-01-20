@@ -113,7 +113,7 @@ public class InitDbService {
 		
 		User userUser = new User();
 		userUser.setEnabled(true);
-		userUser.setLogin("test");
+		userUser.setLogin("oficir");
 		userUser.setPassword(bc.encode("admin"));
 		List<Role> roles1 = new ArrayList<Role>();
 		roles1.add(roleUser); roles1.add(roleOfficer);
@@ -126,7 +126,7 @@ public class InitDbService {
 		equipmentRepository.save(eq3);
 		
 		MyCharacter char3 = new MyCharacter();
-		char3.setName("Hlavní postavièka 1");
+		char3.setName("Oficírova postavièka 1");
 		char3.setCharClass("Gunslinger");
 		char3.setUser(userUser);
 		char3.setEquip(eq3);
@@ -138,7 +138,7 @@ public class InitDbService {
 		equipmentRepository.save(eq4);
 		
 		MyCharacter char4 = new MyCharacter();
-		char4.setName("Druhá postavièka 1");
+		char4.setName("Druhá Oficírova postavièka 1");
 		char4.setCharClass("Jedi Knight");
 		char4.setUser(userUser);
 		char4.setEquip(eq4);

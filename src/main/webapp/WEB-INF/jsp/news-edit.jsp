@@ -24,7 +24,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary col-md-offset-10" />
+			<input type="submit" value="Aktualizovat" class="btn btn-lg btn-primary col-md-offset-10" />
 		</div>
 	</div>
 

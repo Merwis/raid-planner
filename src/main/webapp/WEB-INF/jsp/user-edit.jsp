@@ -28,7 +28,7 @@
 	
 	<div class="form-group">
 		<div class="col-sm-2 col-md-offset-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
@@ -38,6 +38,9 @@
 
 <c:if test="${failed eq true }">
 	<div class="alert alert-danger">Špatně zadané původní heslo.</div>
+</c:if>
+<c:if test="${failed eq false }">
+	<div class="alert alert-danger">Špatně zadané nové heslo.</div>
 </c:if>
 
 <form:form action="password/${user.id}.html" commandName="updateUserPassword" cssClass="form-horizontal userEditPasswordForm">
@@ -65,7 +68,7 @@
 	
 	<div class="form-group">
 		<div class="col-sm-2 col-md-offset-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
@@ -99,11 +102,12 @@ $(document).ready(function() {
 			{
 				rules: {
 					password: {
-						minlength : 5
+						minlength : 5,
+						required : true
 					},
 					password_again: {
-						minlength : 5,
-						equalTo: "#password"
+						equalTo: "#password",
+						required : true
 					}
 				},
 				highlight: function(element) {
@@ -115,10 +119,11 @@ $(document).ready(function() {
 				messages: {
 					password: {
 						minlength: "Heslo musí obsahovat alespoň 5 znaků",
+						required: "Heslo nesmí být prázdné"
 					},
 					password_again: {
-						minlength: "Heslo musí obsahovat alespoň 5 znaků",
-						equalTo: "Neodpovídá původnímu heslu"
+						equalTo: "Neodpovídá původnímu heslu",
+						required: "Kotrola hesla nesmí být prázdná"
 					}
 				}
 			}		

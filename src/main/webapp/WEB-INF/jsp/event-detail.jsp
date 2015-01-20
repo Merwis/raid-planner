@@ -81,7 +81,7 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 	<div class="form-group">
 		<div class="col-sm-2 col-md-offset-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Aktualizovat" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
@@ -273,7 +273,7 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 	<div class="form-group">
 		<div class="col-sm-2 col-md-offset-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
@@ -324,23 +324,13 @@ $("#timepicker").timepicker({ 'timeFormat': 'H:i', 'step': 15, 'scrollDefault': 
 
 	<div class="form-group">
 		<div class="col-sm-2 col-md-offset-2">
-			<input type="submit" value="Save" class="btn btn-lg btn-primary" />
+			<input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
 		</div>
 	</div>
 
 </form:form>
 </c:if>
-<%-- <c:forEach items="${coeF}" var="coe">
-<c:out value="${coe.myCharacter.name}" /><br />
-<c:out value="${coe.status}" /><br />
-<c:out value="${coe.role}" /><br />
-</c:forEach>
-------------------------------------------<br />
-<c:forEach items="${coeC}" var="coeC">
-<c:out value="${coeC.myCharacter.name}" /><br />
-<c:out value="${coeC.status}" /><br />
-<c:out value="${coeC.role}" /><br />
-</c:forEach>  --%>
+
 
 
 

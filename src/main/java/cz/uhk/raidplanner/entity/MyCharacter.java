@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
 
@@ -26,7 +27,8 @@ public class MyCharacter {
 	private String race;
 	private String charClass;
 	private String role;
-	private int level;
+	@Digits(integer=2, fraction=0, message="Level musí být rozumné èíslo")
+	private String level;
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -86,10 +88,10 @@ public class MyCharacter {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public int getLevel() {
+	public String getLevel() {
 		return level;
 	}
-	public void setLevel(int level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 	

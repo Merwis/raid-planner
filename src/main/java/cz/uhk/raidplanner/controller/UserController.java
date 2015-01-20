@@ -103,7 +103,8 @@ public class UserController {
 	public String updateUserPassword(Model model, @PathVariable int id, @Valid @ModelAttribute("updateUser") User user, BindingResult result, 
 			Principal principal, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return editUser(model, id, principal);
+			redirectAttributes.addFlashAttribute("failed", false);
+			return "redirect:/user/edit/{id}.html";
 		}
 		User user1 = userService.findOne(id);
 		if (user1.getLogin().toString().equals(principal.getName().toString())) {

@@ -50,7 +50,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <security:authorize access="isAnonymous()">
             <a class="navbar-brand" href='<spring:url value="/" />'>Raidplanner</a>
+            </security:authorize>
+            <security:authorize access="isAuthenticated()">
+            <a class="navbar-brand" href='<spring:url value="/news.html" />'>Raidplanner</a>
+            </security:authorize>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
